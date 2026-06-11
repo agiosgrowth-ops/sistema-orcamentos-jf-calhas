@@ -150,10 +150,23 @@
   .tl-dias.ok { color: var(--verde); }
 
   /* FILTROS */
-  .filtros { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .filtros { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
   .filtro-btn { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--borda); background: white; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; color: var(--texto-sec); }
   .filtro-btn:hover { border-color: var(--laranja-borda); color: var(--laranja); }
   .filtro-btn.ativo { background: var(--laranja); color: white; border-color: var(--laranja); }
+
+  .filtro-periodo { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; background: white; border: 1px solid var(--borda); border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; }
+  .filtro-periodo label { font-size: 11px; font-weight: 600; color: var(--texto-sec); text-transform: uppercase; letter-spacing: 0.4px; white-space: nowrap; }
+  .filtro-periodo select { padding: 5px 8px; border: 1px solid var(--borda); border-radius: 5px; font-size: 12px; font-family: 'DM Sans', sans-serif; color: var(--texto); background: var(--cinza-claro); cursor: pointer; }
+  .filtro-periodo select:focus { outline: none; border-color: var(--laranja); }
+  .filtro-periodo .sep { color: var(--texto-sec); font-size: 12px; }
+  .btn-filtrar-periodo { padding: 5px 12px; background: var(--laranja); color: white; border: none; border-radius: 5px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+  .btn-filtrar-periodo:hover { background: #b84915; }
+  .btn-limpar-periodo { padding: 5px 10px; background: white; color: var(--texto-sec); border: 1px solid var(--borda); border-radius: 5px; font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+  .btn-limpar-periodo:hover { background: var(--cinza-claro); color: var(--vermelho); border-color: var(--vermelho-borda); }
+  .filtro-periodo.ativo { background: var(--azul-claro); border-color: #b8d0f0; }
+  .filtro-periodo.ativo label { color: var(--azul); }
+  .resultado-periodo { font-size: 11px; color: var(--azul); font-weight: 600; margin-left: auto; white-space: nowrap; }
 
   /* VAZIO */
   .lista-vazia { text-align: center; padding: 32px 20px; color: var(--texto-sec); }
@@ -239,13 +252,33 @@
     <!-- COLUNA ESQUERDA -->
     <div>
 
-      <!-- FILTROS -->
+      <!-- FILTROS DE STATUS -->
       <div class="filtros">
-        <button class="filtro-btn ativo" onclick="filtrar('todos')">Todos</button>
-        <button class="filtro-btn" onclick="filtrar('urgente')">Vencidos</button>
-        <button class="filtro-btn" onclick="filtrar('atencao')">Vencem hoje</button>
-        <button class="filtro-btn" onclick="filtrar('ok')">No prazo</button>
-        <button class="filtro-btn" onclick="filtrar('aprovado')">Aprovados</button>
+        <button class="filtro-btn ativo" onclick="filtrar('todos', event)">Todos</button>
+        <button class="filtro-btn" onclick="filtrar('urgente', event)">Vencidos</button>
+        <button class="filtro-btn" onclick="filtrar('atencao', event)">Vencem hoje</button>
+        <button class="filtro-btn" onclick="filtrar('ok', event)">No prazo</button>
+        <button class="filtro-btn" onclick="filtrar('aprovado', event)">Aprovados</button>
+      </div>
+
+      <!-- FILTRO DE PERÍODO -->
+      <div class="filtro-periodo" id="filtro-periodo-box">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0">
+          <rect x="1" y="2" width="12" height="11" rx="1.5" stroke="var(--texto-sec)" stroke-width="1.2" fill="none"/>
+          <line x1="4" y1="1" x2="4" y2="3.5" stroke="var(--texto-sec)" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="10" y1="1" x2="10" y2="3.5" stroke="var(--texto-sec)" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="1" y1="5.5" x2="13" y2="5.5" stroke="var(--texto-sec)" stroke-width="1.2"/>
+        </svg>
+        <label>Período</label>
+        <select id="periodo-de" onchange="aplicarPeriodo()">
+          <option value="">De</option>
+        </select>
+        <span class="sep">→</span>
+        <select id="periodo-ate" onchange="aplicarPeriodo()">
+          <option value="">Até</option>
+        </select>
+        <span class="resultado-periodo" id="resultado-periodo" style="display:none"></span>
+        <button class="btn-limpar-periodo" id="btn-limpar-periodo" onclick="limparPeriodo()" style="display:none">Limpar</button>
       </div>
 
       <!-- LISTA DE ORÇAMENTOS -->
@@ -481,20 +514,42 @@ function formatarData(ds) {
 // ============================================================
 function renderizarLista() {
   const lista = document.getElementById('lista-orcamentos');
+
   let filtrados = orcamentos.filter(o => {
-    if (filtroAtivo === 'todos') return true;
-    if (filtroAtivo === 'aprovado') return o.status === 'aprovado';
-    return calcularStatus(o) === filtroAtivo && o.status !== 'aprovado';
+    // Filtro de status
+    const passaStatus = (() => {
+      if (filtroAtivo === 'todos') return true;
+      if (filtroAtivo === 'aprovado') return o.status === 'aprovado';
+      return calcularStatus(o) === filtroAtivo && o.status !== 'aprovado';
+    })();
+
+    // Filtro de período
+    const passaPeriodo = (() => {
+      if (!periodoAtivo.de && !periodoAtivo.ate) return true;
+      const dataOrc = new Date(o.dataEnvio + 'T00:00:00');
+      if (periodoAtivo.de && dataOrc < periodoAtivo.de) return false;
+      if (periodoAtivo.ate && dataOrc > periodoAtivo.ate) return false;
+      return true;
+    })();
+
+    return passaStatus && passaPeriodo;
   });
 
   if (filtrados.length === 0) {
+    const temPeriodo = periodoAtivo.de || periodoAtivo.ate;
     lista.innerHTML = `<div class="lista-vazia">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
         <rect x="6" y="6" width="28" height="28" rx="4" stroke="#888" stroke-width="1.5" fill="none"/>
         <line x1="13" y1="20" x2="27" y2="20" stroke="#888" stroke-width="1.3" stroke-linecap="round"/>
         <line x1="20" y1="13" x2="20" y2="27" stroke="#888" stroke-width="1.3" stroke-linecap="round"/>
       </svg>
-      <p>${filtroAtivo === 'todos' ? 'Nenhum orçamento registrado ainda.<br>Clique em "Registrar orçamento" para começar.' : 'Nenhum orçamento nesta categoria.'}</p>
+      <p>${
+        temPeriodo
+          ? 'Nenhum orçamento encontrado<br>no período selecionado.'
+          : filtroAtivo === 'todos'
+            ? 'Nenhum orçamento registrado ainda.<br>Clique em "Registrar orçamento" para começar.'
+            : 'Nenhum orçamento nesta categoria.'
+      }</p>
     </div>`;
     return;
   }
@@ -676,13 +731,92 @@ function excluirOrcamento(id) {
 }
 
 // ============================================================
-// FILTROS
+// FILTROS DE STATUS
 // ============================================================
-function filtrar(tipo) {
+function filtrar(tipo, ev) {
   filtroAtivo = tipo;
   document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('ativo'));
-  event.target.classList.add('ativo');
+  if (ev && ev.target) ev.target.classList.add('ativo');
   renderizarLista();
+}
+
+// ============================================================
+// FILTRO DE PERÍODO — 2025 a 2055
+// ============================================================
+let periodoAtivo = { de: null, ate: null };
+
+function popularSelectsAno() {
+  const anos = [];
+  for (let a = 2025; a <= 2055; a++) anos.push(a);
+  const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+  const selDe = document.getElementById('periodo-de');
+  const selAte = document.getElementById('periodo-ate');
+
+  // Opção padrão
+  selDe.innerHTML = '<option value="">De (ano)</option>';
+  selAte.innerHTML = '<option value="">Até (ano)</option>';
+
+  anos.forEach(a => {
+    selDe.innerHTML += `<option value="${a}" ${a === 2025 ? '' : ''}>${a}</option>`;
+    selAte.innerHTML += `<option value="${a}">${a}</option>`;
+  });
+
+  // Pré-selecionar ano atual no "De" e ano atual no "Até"
+  const anoAtual = new Date().getFullYear();
+  selDe.value = anoAtual;
+  selAte.value = anoAtual;
+}
+
+function aplicarPeriodo() {
+  const de = document.getElementById('periodo-de').value;
+  const ate = document.getElementById('periodo-ate').value;
+
+  if (!de && !ate) {
+    periodoAtivo = { de: null, ate: null };
+    document.getElementById('resultado-periodo').style.display = 'none';
+    document.getElementById('btn-limpar-periodo').style.display = 'none';
+    document.getElementById('filtro-periodo-box').classList.remove('ativo');
+    renderizarLista();
+    return;
+  }
+
+  // Validar intervalo
+  if (de && ate && parseInt(de) > parseInt(ate)) {
+    mostrarToast('O ano inicial não pode ser maior que o final');
+    return;
+  }
+
+  periodoAtivo = {
+    de: de ? new Date(parseInt(de), 0, 1) : null,
+    ate: ate ? new Date(parseInt(ate), 11, 31, 23, 59, 59) : null
+  };
+
+  const label = de && ate && de === ate
+    ? `${de}`
+    : de && ate ? `${de} → ${ate}`
+    : de ? `A partir de ${de}`
+    : `Até ${ate}`;
+
+  const res = document.getElementById('resultado-periodo');
+  res.textContent = label;
+  res.style.display = 'inline';
+  document.getElementById('btn-limpar-periodo').style.display = 'inline';
+  document.getElementById('filtro-periodo-box').classList.add('ativo');
+
+  renderizarLista();
+}
+
+function limparPeriodo() {
+  periodoAtivo = { de: null, ate: null };
+  const anoAtual = new Date().getFullYear();
+  document.getElementById('periodo-de').value = anoAtual;
+  document.getElementById('periodo-ate').value = anoAtual;
+  document.getElementById('resultado-periodo').style.display = 'none';
+  document.getElementById('btn-limpar-periodo').style.display = 'none';
+  document.getElementById('filtro-periodo-box').classList.remove('ativo');
+  renderizarLista();
+  mostrarToast('Filtro de período removido');
 }
 
 // ============================================================
@@ -703,6 +837,7 @@ function mostrarToast(msg) {
 // INICIALIZAR + VERIFICAR ALERTAS A CADA MINUTO
 // ============================================================
 carregarOrcamentos();
+popularSelectsAno();
 renderizarLista();
 atualizarStats();
 setInterval(() => { atualizarStats(); }, 60000);
