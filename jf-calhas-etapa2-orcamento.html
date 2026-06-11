@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JF // CALHAS — Novo Orçamento</title>
+<title>JF // CALHAS — Configurações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
     --preto: #1a1a1a;
@@ -16,820 +18,926 @@
     --laranja-borda: #e8b49a;
     --verde: #2d7a4f;
     --verde-claro: #e8f4ee;
-    --verde-borda: #a8d8bc;
     --azul: #1d5fa8;
     --azul-claro: #e8f0fa;
-    --roxo: #5a3fa8;
-    --roxo-claro: #eeebfa;
     --texto: #1a1a1a;
     --texto-sec: #666660;
     --branco: #ffffff;
     --radius: 8px;
     --sombra: 0 1px 3px rgba(0,0,0,0.08);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cinza-claro); color: var(--texto); font-size: 14px; line-height: 1.5; }
 
-  /* HEADER */
-  .header { background: var(--preto); color: white; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 52px; position: sticky; top: 0; z-index: 100; }
-  .header-logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
-  .header-logo-icon { width: 28px; height: 28px; background: var(--laranja); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-  .header-nav { display: flex; gap: 4px; }
-  .nav-btn { padding: 5px 12px; border-radius: 5px; border: none; background: transparent; color: rgba(255,255,255,0.55); cursor: pointer; font-size: 12px; font-weight: 500; transition: all 0.15s; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cinza-claro);
+    color: var(--texto);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Header */
+  .header {
+    background: var(--preto);
+    color: white;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .header-logo-icon {
+    width: 30px; height: 30px;
+    background: var(--laranja);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-nav {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
   .nav-btn:hover { background: rgba(255,255,255,0.1); color: white; }
   .nav-btn.ativo { background: var(--laranja); color: white; }
 
-  /* LAYOUT PRINCIPAL */
-  .layout { display: grid; grid-template-columns: 1fr 340px; gap: 16px; max-width: 1100px; margin: 0 auto; padding: 16px; }
+  /* Layout */
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
 
-  /* COLUNA ESQUERDA */
-  .col-esq { display: flex; flex-direction: column; gap: 14px; }
+  .page-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--preto);
+  }
+  .page-sub {
+    color: var(--texto-sec);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
 
-  /* COLUNA DIREITA — Resumo do orçamento */
-  .col-dir { position: sticky; top: 68px; align-self: start; }
-
-  /* CARDS */
-  .card { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--radius); box-shadow: var(--sombra); overflow: hidden; }
-  .card-header { padding: 12px 16px; border-bottom: 1px solid var(--borda); display: flex; align-items: center; gap: 8px; background: var(--cinza-claro); }
-  .card-header-icon { width: 26px; height: 26px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  /* Cards de seção */
+  .card {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--borda);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cinza-claro);
+  }
+  .card-header-icon {
+    width: 28px; height: 28px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
   .icon-laranja { background: var(--laranja-claro); }
   .icon-verde { background: var(--verde-claro); }
   .icon-azul { background: var(--azul-claro); }
-  .icon-roxo { background: var(--roxo-claro); }
-  .card-header h2 { font-size: 13px; font-weight: 600; }
-  .card-header p { font-size: 11px; color: var(--texto-sec); }
-  .card-body { padding: 16px; }
 
-  /* FORMULÁRIO CLIENTE */
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card-header h2 { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.2px; color: var(--preto); }
+  .card-header p { font-size: 11px; color: var(--texto-sec); margin-top: 1px; }
+  .card-body { padding: 20px; }
+
+  /* Formulário */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
   .col-span-2 { grid-column: span 2; }
-  .campo { display: flex; flex-direction: column; gap: 4px; }
-  .campo label { font-size: 11px; font-weight: 600; color: var(--texto-sec); text-transform: uppercase; letter-spacing: 0.4px; }
-  .campo input, .campo textarea, .campo select { padding: 8px 10px; border: 1px solid var(--borda); border-radius: 6px; font-size: 13px; color: var(--texto); background: var(--branco); transition: border 0.15s; font-family: inherit; width: 100%; }
-  .campo input:focus, .campo textarea:focus { outline: none; border-color: var(--laranja); box-shadow: 0 0 0 3px rgba(212,87,26,0.1); }
-  .campo textarea { resize: vertical; min-height: 65px; }
 
-  /* ABAS DE SERVIÇO */
-  .servico-abas { display: flex; border-bottom: 1px solid var(--borda); background: var(--cinza-claro); overflow-x: auto; }
-  .servico-aba { padding: 10px 16px; font-size: 12px; font-weight: 600; color: var(--texto-sec); cursor: pointer; border: none; background: transparent; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; display: flex; align-items: center; gap: 5px; }
-  .servico-aba:hover { color: var(--laranja); }
-  .servico-aba.ativa { color: var(--laranja); border-bottom-color: var(--laranja); background: white; }
-  .servico-aba .badge-count { background: var(--laranja); color: white; border-radius: 10px; padding: 1px 6px; font-size: 10px; display: none; }
-  .servico-aba.tem-itens .badge-count { display: inline; }
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .campo label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--texto-sec);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .campo input, .campo textarea, .campo select {
+    padding: 9px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--texto);
+    background: var(--branco);
+    transition: border 0.15s;
+    font-family: inherit;
+    width: 100%;
+  }
+  .campo input:focus, .campo textarea:focus, .campo select:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(212,87,26,0.1);
+  }
+  .campo textarea { resize: vertical; min-height: 70px; }
 
-  .painel-servico { display: none; padding: 14px 16px; }
-  .painel-servico.ativo { display: block; }
+  /* Tabela de materiais */
+  .tabela-materiais { width: 100%; border-collapse: collapse; }
+  .tabela-materiais th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--texto-sec);
+    border-bottom: 1px solid var(--borda);
+    background: var(--cinza-claro);
+  }
+  .tabela-materiais td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--borda);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .tabela-materiais tr:last-child td { border-bottom: none; }
+  .tabela-materiais tr:hover td { background: var(--cinza-claro); }
 
-  /* GRADE DE MATERIAIS */
-  .materiais-titulo { font-size: 11px; font-weight: 600; color: var(--texto-sec); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-  .materiais-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-bottom: 14px; }
-  .material-btn { border: 1px solid var(--borda); border-radius: 6px; padding: 10px 10px 8px; background: white; cursor: pointer; text-align: left; transition: all 0.15s; position: relative; }
-  .material-btn:hover { border-color: var(--laranja-borda); background: var(--laranja-claro); transform: translateY(-1px); }
-  .material-btn.selecionado { border-color: var(--laranja); background: var(--laranja-claro); }
-  .material-btn .mat-cod { font-size: 10px; color: var(--texto-sec); font-weight: 500; display: block; }
-  .material-btn .mat-nome { font-size: 12px; font-weight: 600; color: var(--texto); display: block; margin: 2px 0; }
-  .material-btn .mat-preco { font-size: 11px; color: var(--verde); font-weight: 600; }
-  .material-btn .mat-preco.sem-preco { color: #bbb; }
-  .material-btn .check { position: absolute; top: 6px; right: 6px; width: 16px; height: 16px; background: var(--laranja); border-radius: 50%; color: white; font-size: 10px; display: none; align-items: center; justify-content: center; }
-  .material-btn.selecionado .check { display: flex; }
+  .campo-preco {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+    transition: border 0.15s;
+  }
+  .campo-preco:focus-within {
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(212,87,26,0.1);
+  }
+  .campo-preco span {
+    padding: 7px 10px;
+    background: var(--cinza-claro);
+    color: var(--texto-sec);
+    font-size: 12px;
+    font-weight: 500;
+    border-right: 1px solid var(--borda);
+    white-space: nowrap;
+  }
+  .campo-preco input {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 7px 10px;
+    width: 100px;
+    font-size: 13px;
+    background: transparent;
+  }
+  .campo-preco input:focus { outline: none; }
 
-  /* ITENS SELECIONADOS */
-  .itens-selecionados { background: var(--cinza-claro); border-radius: 6px; padding: 10px 12px; margin-top: 6px; }
-  .itens-titulo { font-size: 11px; font-weight: 600; color: var(--texto-sec); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
-  .item-linha { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--borda); }
-  .item-linha:last-child { border-bottom: none; }
-  .item-nome { flex: 1; font-size: 12px; font-weight: 500; }
-  .item-qtd-wrap { display: flex; align-items: center; gap: 4px; }
-  .item-qtd-wrap label { font-size: 11px; color: var(--texto-sec); }
-  .item-qtd { width: 60px; padding: 4px 6px; border: 1px solid var(--borda); border-radius: 4px; font-size: 12px; text-align: center; }
-  .item-qtd:focus { outline: none; border-color: var(--laranja); }
-  .item-unidade { font-size: 11px; color: var(--texto-sec); }
-  .item-subtotal { font-size: 12px; font-weight: 600; color: var(--verde); min-width: 70px; text-align: right; }
-  .item-remover { background: none; border: none; cursor: pointer; color: #ccc; font-size: 14px; padding: 2px 4px; border-radius: 3px; }
-  .item-remover:hover { color: #e24b4b; background: #fff0f0; }
-  .vazio-msg { font-size: 12px; color: #bbb; text-align: center; padding: 12px 0; }
+  .badge-categoria {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badge-laranja { background: var(--laranja-claro); color: var(--laranja); }
+  .badge-verde { background: var(--verde-claro); color: var(--verde); }
+  .badge-azul { background: var(--azul-claro); color: var(--azul); }
+  .badge-cinza { background: #f0ede8; color: #666; }
 
-  /* PAINEL RESUMO (direita) */
-  .resumo-header { padding: 14px 16px; border-bottom: 1px solid var(--borda); background: var(--preto); }
-  .resumo-header h3 { color: white; font-size: 13px; font-weight: 600; }
-  .resumo-header p { color: rgba(255,255,255,0.5); font-size: 11px; }
-  .resumo-body { padding: 14px 16px; }
-  .resumo-secao { margin-bottom: 14px; }
-  .resumo-secao-titulo { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--texto-sec); margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid var(--borda); }
-  .resumo-linha { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 12px; }
-  .resumo-linha span:first-child { color: var(--texto-sec); }
-  .resumo-linha span:last-child { font-weight: 500; }
-  .resumo-total-box { background: var(--laranja); border-radius: 6px; padding: 12px 14px; margin: 12px 0; }
-  .resumo-total-label { color: rgba(255,255,255,0.8); font-size: 11px; font-weight: 500; }
-  .resumo-total-valor { color: white; font-size: 22px; font-weight: 700; margin-top: 2px; }
-  .resumo-validade { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--texto-sec); background: var(--cinza-claro); border-radius: 5px; padding: 7px 10px; margin-bottom: 12px; }
-  .resumo-obs { font-size: 11px; color: var(--texto-sec); background: var(--azul-claro); border-radius: 5px; padding: 7px 10px; margin-bottom: 12px; line-height: 1.5; }
+  /* Abas de categorias de materiais */
+  .abas {
+    display: flex;
+    border-bottom: 1px solid var(--borda);
+    margin-bottom: 0;
+    overflow-x: auto;
+    gap: 0;
+    background: var(--cinza-claro);
+  }
+  .aba {
+    padding: 10px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--texto-sec);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    border: none;
+    background: transparent;
+    transition: all 0.15s;
+    margin-bottom: -1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .aba:hover { color: var(--laranja); }
+  .aba.ativa { color: var(--laranja); border-bottom: 2px solid var(--laranja); font-weight: 600; background: white; }
+  .aba-icon { display: flex; align-items: center; justify-content: center; width: 15px; height: 15px; flex-shrink: 0; }
 
-  .btn-gerar { width: 100%; padding: 11px; background: var(--laranja); color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.15s; letter-spacing: 0.3px; }
-  .btn-gerar:hover { background: #b84915; }
-  .btn-gerar:disabled { background: #ccc; cursor: not-allowed; }
-  .btn-limpar { width: 100%; padding: 8px; background: white; color: var(--texto-sec); border: 1px solid var(--borda); border-radius: 6px; font-size: 12px; cursor: pointer; margin-top: 6px; transition: all 0.15s; }
-  .btn-limpar:hover { background: var(--cinza-claro); color: #e24b4b; border-color: #f09595; }
+  .painel-aba { display: none; }
+  .painel-aba.ativo { display: block; }
 
-  /* MODAL DE ORÇAMENTO GERADO */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; overflow-y: auto; padding: 20px; }
-  .modal-overlay.aberto { display: flex; align-items: flex-start; justify-content: center; }
-  .modal { background: white; border-radius: 10px; width: 100%; max-width: 680px; overflow: hidden; }
-  .modal-topo { background: var(--preto); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
-  .modal-topo h3 { font-size: 14px; font-weight: 600; }
-  .modal-fechar { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 18px; line-height: 1; }
-  .modal-fechar:hover { color: white; }
-  .modal-body { padding: 20px; }
-  .orc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 2px solid var(--preto); }
-  .orc-logo-area h1 { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
-  .orc-logo-area p { font-size: 11px; color: var(--texto-sec); margin-top: 2px; }
-  .orc-data { font-size: 12px; color: var(--texto-sec); text-align: right; }
-  .orc-info-grid { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 12px; margin-bottom: 14px; }
-  .orc-info-grid .rotulo { font-weight: 600; color: var(--texto-sec); }
-  .orc-secao { margin-bottom: 14px; }
-  .orc-secao h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: white; background: var(--preto); padding: 5px 10px; border-radius: 4px; margin-bottom: 8px; }
-  .orc-tabela { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .orc-tabela th { background: var(--cinza-claro); padding: 6px 10px; text-align: left; font-size: 11px; font-weight: 600; color: var(--texto-sec); border-bottom: 1px solid var(--borda); }
-  .orc-tabela td { padding: 6px 10px; border-bottom: 1px solid var(--borda); }
-  .orc-tabela tr:last-child td { border-bottom: none; }
-  .orc-total-linha { display: flex; justify-content: flex-end; margin-top: 10px; }
-  .orc-total-box { background: var(--laranja); color: white; padding: 10px 18px; border-radius: 6px; text-align: right; }
-  .orc-total-box .label { font-size: 11px; opacity: 0.8; }
-  .orc-total-box .valor { font-size: 20px; font-weight: 800; }
-  .orc-rodape { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--borda); font-size: 11px; color: var(--texto-sec); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .orc-assinaturas { display: flex; justify-content: space-between; margin-top: 24px; }
-  .orc-assinatura { text-align: center; }
-  .orc-assinatura .linha { border-top: 1px solid var(--preto); width: 160px; margin-bottom: 4px; }
-  .orc-assinatura p { font-size: 11px; color: var(--texto-sec); }
-  .modal-acoes { padding: 12px 16px; border-top: 1px solid var(--borda); display: flex; gap: 8px; background: var(--cinza-claro); }
-  .btn-imprimir { flex: 1; padding: 9px; background: var(--preto); color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
-  .btn-imprimir:hover { background: #333; }
-  .btn-fechar-modal { flex: 1; padding: 9px; background: white; color: var(--texto); border: 1px solid var(--borda); border-radius: 6px; font-size: 13px; cursor: pointer; }
+  /* Botões */
+  .btn-salvar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: var(--laranja);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-salvar:hover { background: #b84915; }
+  .btn-salvar:active { transform: scale(0.98); }
 
-  /* TOAST */
-  .toast { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--preto); color: white; padding: 10px 20px; border-radius: 7px; font-size: 13px; font-weight: 500; z-index: 999; white-space: nowrap; }
-  .toast.visivel { display: block; }
+  .btn-sec {
+    padding: 10px 18px;
+    background: var(--branco);
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-sec:hover { background: var(--cinza-claro); border-color: #ccc; }
 
-  @media (max-width: 700px) {
-    .layout { grid-template-columns: 1fr; }
-    .col-dir { position: static; }
-    .form-grid { grid-template-columns: 1fr; }
-    .col-span-2 { grid-column: span 1; }
-    .header-nav { display: none; }
+  .acoes-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid var(--borda);
+    background: var(--cinza-claro);
   }
 
-  @media print {
-    body * { visibility: hidden; }
-    .modal, .modal * { visibility: visible; }
-    .modal { position: absolute; left: 0; top: 0; width: 100%; }
-    .modal-topo, .modal-acoes { display: none; }
+  .toast {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--preto);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 999;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    gap: 8px;
+    align-items: center;
+  }
+  .toast.visivel { display: flex; }
+
+  .info-box {
+    background: var(--azul-claro);
+    border: 1px solid #b8d0f0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--azul);
+    margin-bottom: 16px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
+    .col-span-2 { grid-column: span 1; }
+    .header-nav { display: none; }
+    .tabela-materiais th:nth-child(3), .tabela-materiais td:nth-child(3) { display: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- Header -->
 <div class="header">
   <div class="header-logo">
-    <div class="header-logo-icon">🏠</div>
+    <div class="header-logo-icon">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M2 8L9 2L16 8V16H12V11H6V16H2V8Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+        <line x1="6" y1="11" x2="12" y2="11" stroke="white" stroke-width="1.5"/>
+      </svg>
+    </div>
     JF // CALHAS
   </div>
   <div class="header-nav">
-    <button class="nav-btn" onclick="window.location.href='jf-calhas-etapa1-configuracoes.html'">⚙️ Configurações</button>
-    <button class="nav-btn ativo">📋 Novo Orçamento</button>
-    <button class="nav-btn" onclick="mostrarToast('Disponível na Etapa 5!')">🔔 Alertas</button>
+    <button class="nav-btn ativo">Configurações</button>
+    <button class="nav-btn" onclick="alert('Disponível na Etapa 2!')">Novo Orçamento</button>
+    <button class="nav-btn" onclick="alert('Disponível na Etapa 5!')">Alertas</button>
   </div>
 </div>
 
-<!-- LAYOUT -->
-<div class="layout">
+<!-- Conteúdo -->
+<div class="container">
 
-  <!-- ====== COLUNA ESQUERDA ====== -->
-  <div class="col-esq">
+  <div class="page-title">Configurações do sistema</div>
+  <div class="page-sub">Preencha uma vez — seus dados aparecem em todos os orçamentos automaticamente</div>
 
-    <!-- DADOS DO CLIENTE -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-header-icon icon-azul">👤</div>
-        <div>
-          <h2>Dados do cliente</h2>
-          <p>Informações para o cabeçalho do orçamento</p>
-        </div>
+  <!-- SEÇÃO 1: Dados do profissional -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-laranja">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="#d4571a" stroke-width="1.3" fill="none"/>
+          <circle cx="5.5" cy="7.5" r="1.8" stroke="#d4571a" stroke-width="1.3" fill="none"/>
+          <line x1="9" y1="6" x2="13" y2="6" stroke="#d4571a" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="9" y1="9" x2="12" y2="9" stroke="#d4571a" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
       </div>
-      <div class="card-body">
-        <div class="form-grid">
-          <div class="campo">
-            <label>Nome / Empresa</label>
-            <input type="text" id="cli_nome" placeholder="Ex: Hamilton" oninput="atualizarResumo()">
-          </div>
-          <div class="campo">
-            <label>Tipo de orçamento</label>
-            <input type="text" id="cli_tipo_orc" placeholder="Ex: Rufo de fechamento" oninput="atualizarResumo()">
-          </div>
-          <div class="campo col-span-2">
-            <label>Endereço</label>
-            <input type="text" id="cli_endereco" placeholder="Rua, número, bairro" oninput="atualizarResumo()">
-          </div>
-          <div class="campo">
-            <label>Cidade / Estado</label>
-            <input type="text" id="cli_cidade" placeholder="Ribeirão Preto SP" oninput="atualizarResumo()">
-          </div>
-          <div class="campo">
-            <label>Telefone</label>
-            <input type="text" id="cli_telefone" placeholder="(16) 99999-9999">
-          </div>
-        </div>
+      <div>
+        <h2>Dados do profissional</h2>
+        <p>Aparece no cabeçalho de todos os orçamentos</p>
       </div>
     </div>
-
-    <!-- SELEÇÃO DE SERVIÇOS E MATERIAIS -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-header-icon icon-laranja">🔧</div>
-        <div>
-          <h2>Serviços e materiais</h2>
-          <p>Clique nos materiais para adicionar ao orçamento</p>
-        </div>
-      </div>
-
-      <!-- Abas de tipo de serviço -->
-      <div class="servico-abas">
-        <button class="servico-aba ativa" id="aba-calhas" onclick="trocarServico('calhas')">
-          🔵 Calhas <span class="badge-count" id="count-calhas">0</span>
-        </button>
-        <button class="servico-aba" id="aba-rufos" onclick="trocarServico('rufos')">
-          🟠 Rufos <span class="badge-count" id="count-rufos">0</span>
-        </button>
-        <button class="servico-aba" id="aba-telhado" onclick="trocarServico('telhado')">
-          🏠 Telhado <span class="badge-count" id="count-telhado">0</span>
-        </button>
-        <button class="servico-aba" id="aba-estrutura" onclick="trocarServico('estrutura')">
-          🔩 Estrutura <span class="badge-count" id="count-estrutura">0</span>
-        </button>
-        <button class="servico-aba" id="aba-outros" onclick="trocarServico('outros')">
-          ⚪ Outros <span class="badge-count" id="count-outros">0</span>
-        </button>
-      </div>
-
-      <!-- PAINEL CALHAS -->
-      <div id="painel-calhas" class="painel-servico ativo">
-        <div class="materiais-titulo">Calhas — Chapa 26 (clique para adicionar)</div>
-        <div class="materiais-grade" id="grade-calhas"></div>
-        <div class="itens-selecionados" id="selecionados-calhas">
-          <div class="itens-titulo">Itens selecionados</div>
-          <div id="lista-calhas"><div class="vazio-msg">Nenhum item selecionado</div></div>
-        </div>
-      </div>
-
-      <!-- PAINEL RUFOS -->
-      <div id="painel-rufos" class="painel-servico">
-        <div class="materiais-titulo">Rufos — Chapa 28 (clique para adicionar)</div>
-        <div class="materiais-grade" id="grade-rufos"></div>
-        <div class="itens-selecionados" id="selecionados-rufos">
-          <div class="itens-titulo">Itens selecionados</div>
-          <div id="lista-rufos"><div class="vazio-msg">Nenhum item selecionado</div></div>
-        </div>
-      </div>
-
-      <!-- PAINEL TELHADO -->
-      <div id="painel-telhado" class="painel-servico">
-        <div class="materiais-titulo">Telhado — materiais e componentes</div>
-        <div class="materiais-grade" id="grade-telhado"></div>
-        <div class="itens-selecionados" id="selecionados-telhado">
-          <div class="itens-titulo">Itens selecionados</div>
-          <div id="lista-telhado"><div class="vazio-msg">Nenhum item selecionado</div></div>
-        </div>
-      </div>
-
-      <!-- PAINEL ESTRUTURA -->
-      <div id="painel-estrutura" class="painel-servico">
-        <div class="materiais-titulo">Estrutura metálica</div>
-        <div class="materiais-grade" id="grade-estrutura"></div>
-        <div class="itens-selecionados" id="selecionados-estrutura">
-          <div class="itens-titulo">Itens selecionados</div>
-          <div id="lista-estrutura"><div class="vazio-msg">Nenhum item selecionado</div></div>
-        </div>
-      </div>
-
-      <!-- PAINEL OUTROS -->
-      <div id="painel-outros" class="painel-servico">
-        <div class="materiais-titulo">Outros materiais — por unidade</div>
-        <div class="materiais-grade" id="grade-outros"></div>
-        <div class="itens-selecionados" id="selecionados-outros">
-          <div class="itens-titulo">Itens selecionados</div>
-          <div id="lista-outros"><div class="vazio-msg">Nenhum item selecionado</div></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- DESCRIÇÃO DO SERVIÇO -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-header-icon icon-verde">📝</div>
-        <div>
-          <h2>Descrição do serviço</h2>
-          <p>Descreva o que será feito para o cliente</p>
-        </div>
-      </div>
-      <div class="card-body">
+    <div class="card-body">
+      <div class="form-grid">
         <div class="campo">
-          <label>Descrição detalhada</label>
-          <textarea id="descricao_servico" rows="5" placeholder="Ex: Será feita instalação dos rufos de fechamento lateral juntamente com fechamento do poste..."></textarea>
+          <label>Nome / Empresa</label>
+          <input type="text" id="nome_empresa" placeholder="JF // CALHAS" value="JF // CALHAS">
         </div>
-        <div style="margin-top:10px" class="campo">
-          <label>Observações adicionais</label>
-          <textarea id="obs_adicionais" rows="2" placeholder="Informações extras, condições especiais..."></textarea>
+        <div class="campo">
+          <label>CNPJ</label>
+          <input type="text" id="cnpj" placeholder="00.000.000/0001-00" value="49.401.126/0001-67">
+        </div>
+        <div class="campo">
+          <label>Responsável</label>
+          <input type="text" id="responsavel" placeholder="Nome do técnico" value="Jefferson J Vargas">
+        </div>
+        <div class="campo">
+          <label>Telefone / WhatsApp</label>
+          <input type="text" id="telefone" placeholder="(16) 99999-9999" value="16.99346-2652">
+        </div>
+        <div class="campo col-span-2">
+          <label>Endereço completo</label>
+          <input type="text" id="endereco_empresa" placeholder="Rua, número, complemento" value="Rua Pascoal Santa Maria 574/A23">
+        </div>
+        <div class="campo">
+          <label>E-mail</label>
+          <input type="email" id="email" placeholder="contato@empresa.com" value="Jeferson_j2@hotmail.com">
+        </div>
+        <div class="campo">
+          <label>Cidade / Estado</label>
+          <input type="text" id="cidade_empresa" placeholder="Ribeirão Preto SP" value="Ribeirão Preto SP">
         </div>
       </div>
-    </div>
-
-  </div><!-- /col-esq -->
-
-  <!-- ====== COLUNA DIREITA — RESUMO ====== -->
-  <div class="col-dir">
-    <div class="card">
-      <div class="resumo-header">
-        <h3>📋 Resumo do orçamento</h3>
-        <p>Atualiza automaticamente</p>
-      </div>
-      <div class="resumo-body">
-
-        <div class="resumo-secao">
-          <div class="resumo-secao-titulo">Cliente</div>
-          <div class="resumo-linha">
-            <span>Nome</span>
-            <span id="res-nome">—</span>
-          </div>
-          <div class="resumo-linha">
-            <span>Serviço</span>
-            <span id="res-tipo" style="text-align:right; max-width:160px; font-size:11px">—</span>
-          </div>
-          <div class="resumo-linha">
-            <span>Cidade</span>
-            <span id="res-cidade">—</span>
-          </div>
-        </div>
-
-        <div class="resumo-secao">
-          <div class="resumo-secao-titulo">Itens selecionados</div>
-          <div id="res-itens-lista">
-            <div style="font-size:12px; color:#bbb; text-align:center; padding:8px 0">Nenhum item ainda</div>
-          </div>
-        </div>
-
-        <div class="resumo-total-box">
-          <div class="resumo-total-label">TOTAL DO ORÇAMENTO</div>
-          <div class="resumo-total-valor" id="res-total">R$ 0,00</div>
-        </div>
-
-        <div class="resumo-validade">
-          📅 Válido até: <strong id="res-validade">—</strong>
-        </div>
-
-        <div class="resumo-obs" id="res-obs-box" style="display:none">
-          <strong>Incluso:</strong> <span id="res-obs"></span>
-        </div>
-
-        <button class="btn-gerar" id="btn-gerar" onclick="gerarOrcamento()" disabled>
-          📄 Gerar orçamento
-        </button>
-        <button class="btn-limpar" onclick="limparTudo()">🗑 Limpar tudo</button>
-
-      </div>
-    </div>
-  </div><!-- /col-dir -->
-
-</div><!-- /layout -->
-
-<!-- MODAL DO ORÇAMENTO -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal">
-    <div class="modal-topo">
-      <h3>📄 Orçamento gerado</h3>
-      <button class="modal-fechar" onclick="fecharModal()">✕</button>
-    </div>
-    <div class="modal-body" id="modal-conteudo">
-      <!-- preenchido dinamicamente -->
-    </div>
-    <div class="modal-acoes">
-      <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
-      <button class="btn-fechar-modal" onclick="fecharModal()">Fechar</button>
     </div>
   </div>
-</div>
 
-<div class="toast" id="toast"></div>
+  <!-- SEÇÃO 2: Condições padrão -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-azul">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="2" y="1.5" width="9" height="12" rx="1.2" stroke="#1d5fa8" stroke-width="1.3" fill="none"/>
+          <line x1="4" y1="5" x2="9" y2="5" stroke="#1d5fa8" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="4" y1="7.5" x2="9" y2="7.5" stroke="#1d5fa8" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="4" y1="10" x2="7" y2="10" stroke="#1d5fa8" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M10 10.5 L14.5 15" stroke="#1d5fa8" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="11.5" cy="9" r="2.5" stroke="#1d5fa8" stroke-width="1.3" fill="none"/>
+        </svg>
+      </div>
+      <div>
+        <h2>Condições padrão dos orçamentos</h2>
+        <p>Textos que aparecem no rodapé de todos os orçamentos</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="campo">
+          <label>Validade do orçamento (dias)</label>
+          <input type="number" id="validade_dias" value="7" min="1" max="30">
+        </div>
+        <div class="campo">
+          <label>Garantia do serviço</label>
+          <input type="text" id="garantia" value="1 ano — mão de obra e material">
+        </div>
+        <div class="campo col-span-2">
+          <label>Texto de garantia (detalhado)</label>
+          <textarea id="texto_garantia">Garantia referente a serviço realizado pelo técnico da empresa referente a mão de obra e material, desde que não haja violação por outro técnico dos serviços prestados.</textarea>
+        </div>
+        <div class="campo col-span-2">
+          <label>Formas de pagamento</label>
+          <input type="text" id="pagamento" value="PIX, Dinheiro ou cartão de crédito até 10x sem juros">
+        </div>
+        <div class="campo col-span-2">
+          <label>Observações padrão (aparece em todos os orçamentos)</label>
+          <textarea id="obs_padrao" placeholder="Ex: Serviço inclui mão de obra e material. Bucha parafuso n8. PU industrial.">Serviço inclui mão de obra e material. Bucha parafuso n8. PU industrial.</textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: Privacidade do orçamento -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-laranja">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <ellipse cx="8" cy="8" rx="7" ry="4.5" stroke="#d4571a" stroke-width="1.3" fill="none"/>
+          <circle cx="8" cy="8" r="2" stroke="#d4571a" stroke-width="1.3" fill="none"/>
+        </svg>
+      </div>
+      <div>
+        <h2>Privacidade do orçamento</h2>
+        <p>Controle o que o cliente vê quando recebe o orçamento</p>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding:4px 0 16px;">
+        <div style="flex:1;">
+          <div style="font-size:13px; font-weight:600; color:var(--preto); margin-bottom:4px;">Mostrar preços unitários no orçamento do cliente</div>
+          <div style="font-size:12px; color:var(--texto-sec); line-height:1.6;">
+            Quando <strong>desativado</strong>, o cliente recebe apenas o <strong>valor total</strong> — sem ver o preço por metro de cada material.<br>
+            Útil para proteger sua margem e estratégia de precificação.
+          </div>
+        </div>
+        <div style="flex-shrink:0; padding-top:2px;">
+          <button id="btn-toggle-precos" onclick="togglePrivacidade()" style="
+            display:flex; align-items:center; gap:8px;
+            border:1px solid var(--borda); border-radius:8px;
+            padding:8px 14px; background:white; cursor:pointer;
+            font-size:12px; font-weight:600; transition:all 0.2s;
+            min-width:130px; justify-content:center;
+          ">
+            <span id="olho-icon">
+              <svg id="svg-olho-aberto" width="17" height="17" viewBox="0 0 17 17" fill="none" style="display:block">
+                <ellipse cx="8.5" cy="8.5" rx="7.5" ry="5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+                <circle cx="8.5" cy="8.5" r="2.2" stroke="currentColor" stroke-width="1.4" fill="none"/>
+              </svg>
+              <svg id="svg-olho-fechado" width="17" height="17" viewBox="0 0 17 17" fill="none" style="display:none">
+                <line x1="2" y1="5" x2="15" y2="13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M4 10 Q8.5 5 13 10" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span id="label-toggle">Visível</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="preview-privacidade" style="
+        border-radius:6px; border:1px solid var(--borda);
+        overflow:hidden; font-size:12px;
+      ">
+        <div style="background:var(--cinza-claro); padding:7px 12px; font-size:11px; font-weight:600; color:var(--texto-sec); text-transform:uppercase; letter-spacing:0.4px;">
+          Pré-visualização — como o cliente verá
+        </div>
+        <div style="padding:12px 14px;">
+          <table style="width:100%; border-collapse:collapse; font-size:12px;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--borda);">
+                <th style="text-align:left; padding:5px 8px; color:var(--texto-sec); font-weight:600;">Descrição</th>
+                <th style="text-align:center; padding:5px 8px; color:var(--texto-sec); font-weight:600;">Qtd</th>
+                <th id="th-preco-unit" style="text-align:right; padding:5px 8px; color:var(--texto-sec); font-weight:600;">Preço unit.</th>
+                <th style="text-align:right; padding:5px 8px; color:var(--texto-sec); font-weight:600;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--borda);">
+                <td style="padding:6px 8px;">Calha RC 60</td>
+                <td style="padding:6px 8px; text-align:center;">12 m</td>
+                <td id="td-preco-unit" style="padding:6px 8px; text-align:right; color:#2d7a4f; font-weight:500;">R$ 28,50/m</td>
+                <td id="td-subtotal" style="padding:6px 8px; text-align:right; font-weight:600;">R$ 342,00</td>
+              </tr>
+              <tr>
+                <td style="padding:6px 8px;">Rufo RC 30</td>
+                <td style="padding:6px 8px; text-align:center;">8 m</td>
+                <td id="td-preco-unit2" style="padding:6px 8px; text-align:right; color:#2d7a4f; font-weight:500;">R$ 19,90/m</td>
+                <td id="td-subtotal2" style="padding:6px 8px; text-align:right; font-weight:600;">R$ 159,20</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+            <div style="background:var(--laranja); color:white; padding:8px 14px; border-radius:5px; text-align:right;">
+              <div style="font-size:10px; opacity:0.8;">TOTAL</div>
+              <div style="font-size:16px; font-weight:700;">R$ 501,20</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4: Materiais -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-verde">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1" stroke="#2d7a4f" stroke-width="1.3" fill="none"/>
+          <rect x="9" y="1.5" width="5.5" height="5.5" rx="1" stroke="#2d7a4f" stroke-width="1.3" fill="none"/>
+          <rect x="1.5" y="9" width="5.5" height="5.5" rx="1" stroke="#2d7a4f" stroke-width="1.3" fill="none"/>
+          <rect x="9" y="9" width="5.5" height="5.5" rx="1" stroke="#2d7a4f" stroke-width="1.3" fill="none"/>
+        </svg>
+      </div>
+      <div>
+        <h2>Materiais e preços</h2>
+        <p>Atualize os preços sempre que receber nova tabela do fornecedor</p>
+      </div>
+    </div>
+
+    <!-- Abas de categorias -->
+    <div class="abas">
+      <button class="aba ativa" onclick="trocarAba('calhas')">
+        <span class="aba-icon"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 10 Q3 4 6.5 4 Q10 4 12 10" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/><line x1="1" y1="10" x2="12" y2="10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        Calhas — Chapa 26
+      </button>
+      <button class="aba" onclick="trocarAba('rufos')">
+        <span class="aba-icon"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 11 L6.5 2 L11 11" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="1" y1="11" x2="12" y2="11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+        Rufos — Chapa 28
+      </button>
+      <button class="aba" onclick="trocarAba('condutores')">
+        <span class="aba-icon"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><line x1="2" y1="6.5" x2="11" y2="6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="6.5" cy="6.5" r="2" stroke="currentColor" stroke-width="1.3" fill="none"/></svg></span>
+        Condutores
+      </button>
+      <button class="aba" onclick="trocarAba('outros')">
+        <span class="aba-icon"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="3" cy="6.5" r="1.2" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="6.5" cy="6.5" r="1.2" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="10" cy="6.5" r="1.2" stroke="currentColor" stroke-width="1.3" fill="none"/></svg></span>
+        Outros Materiais
+      </button>
+    </div>
+
+    <!-- ABA CALHAS -->
+    <div id="painel-calhas" class="painel-aba ativo">
+      <div class="info-box">
+        Materiais para calhas em chapa 26. Preço por metro linear. Atualize sempre que receber nova tabela da <strong>Casa do Calheiro</strong>.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por metro (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-calhas">
+          <!-- gerado pelo JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ABA RUFOS -->
+    <div id="painel-rufos" class="painel-aba">
+      <div class="info-box">
+        Materiais para rufos em chapa 28. Preço por metro linear.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por metro (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-rufos">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ABA CONDUTORES -->
+    <div id="painel-condutores" class="painel-aba">
+      <div class="info-box">
+        Condutores para escoamento de água. Preço por metro linear.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por metro (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-condutores">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ABA OUTROS -->
+    <div id="painel-outros" class="painel-aba">
+      <div class="info-box">
+        Materiais auxiliares — bucha, PU, parafusos, estanho. Preço por unidade.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por unidade (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-outros">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="acoes-rodape">
+      <span style="font-size:12px; color:var(--texto-sec)">Os preços são salvos no seu navegador — só você tem acesso</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-sec" onclick="resetarPrecos()">Restaurar padrão</button>
+        <button class="btn-salvar" onclick="salvarTudo()">Salvar todas as configurações</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- Toast de confirmação -->
+<div class="toast" id="toast">Configurações salvas!</div>
 
 <script>
 // ============================================================
-// DADOS
+// DADOS DOS MATERIAIS
 // ============================================================
-const MATERIAIS = {
+const materiais = {
   calhas: [
-    {cod:'RC-40-C26', nome:'Calha RC 40', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-45-C26', nome:'Calha RC 45', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-50-C26', nome:'Calha RC 50', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-55-C26', nome:'Calha RC 55', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-60-C26', nome:'Calha RC 60', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-70-C26', nome:'Calha RC 70', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-80-C26', nome:'Calha RC 80', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-100-C26', nome:'Calha RC 100', cat:'Chapa 26', unidade:'m'},
-    {cod:'RC-120-C26', nome:'Calha RC 120', cat:'Chapa 26', unidade:'m'},
+    { cod: 'RC-40-C26',  desc: 'Calha RC 40',  cat: 'Chapa 26' },
+    { cod: 'RC-45-C26',  desc: 'Calha RC 45',  cat: 'Chapa 26' },
+    { cod: 'RC-50-C26',  desc: 'Calha RC 50',  cat: 'Chapa 26' },
+    { cod: 'RC-55-C26',  desc: 'Calha RC 55',  cat: 'Chapa 26' },
+    { cod: 'RC-60-C26',  desc: 'Calha RC 60',  cat: 'Chapa 26' },
+    { cod: 'RC-70-C26',  desc: 'Calha RC 70',  cat: 'Chapa 26' },
+    { cod: 'RC-80-C26',  desc: 'Calha RC 80',  cat: 'Chapa 26' },
+    { cod: 'RC-100-C26', desc: 'Calha RC 100', cat: 'Chapa 26' },
+    { cod: 'RC-120-C26', desc: 'Calha RC 120', cat: 'Chapa 26' },
   ],
   rufos: [
-    {cod:'RC-10-C28', nome:'Rufo RC 10', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-15-C28', nome:'Rufo RC 15', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-20-C28', nome:'Rufo RC 20', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-25-C28', nome:'Rufo RC 25', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-28-C28', nome:'Rufo RC 28', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-30-C28', nome:'Rufo RC 30', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-33-C28', nome:'Rufo RC 33', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-35-C28', nome:'Rufo RC 35', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-40-C28', nome:'Rufo RC 40', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-45-C28', nome:'Rufo RC 45', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-50-C28', nome:'Rufo RC 50', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-55-C28', nome:'Rufo RC 55', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-60-C28', nome:'Rufo RC 60', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-70-C28', nome:'Rufo RC 70', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-80-C28', nome:'Rufo RC 80', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-100-C28', nome:'Rufo RC 100', cat:'Chapa 28', unidade:'m'},
-    {cod:'RC-120-C28', nome:'Rufo RC 120', cat:'Chapa 28', unidade:'m'},
+    { cod: 'RC-10-C28',  desc: 'Rufo RC 10',  cat: 'Chapa 28' },
+    { cod: 'RC-15-C28',  desc: 'Rufo RC 15',  cat: 'Chapa 28' },
+    { cod: 'RC-20-C28',  desc: 'Rufo RC 20',  cat: 'Chapa 28' },
+    { cod: 'RC-25-C28',  desc: 'Rufo RC 25',  cat: 'Chapa 28' },
+    { cod: 'RC-28-C28',  desc: 'Rufo RC 28',  cat: 'Chapa 28' },
+    { cod: 'RC-30-C28',  desc: 'Rufo RC 30',  cat: 'Chapa 28' },
+    { cod: 'RC-33-C28',  desc: 'Rufo RC 33',  cat: 'Chapa 28' },
+    { cod: 'RC-35-C28',  desc: 'Rufo RC 35',  cat: 'Chapa 28' },
+    { cod: 'RC-40-C28',  desc: 'Rufo RC 40',  cat: 'Chapa 28' },
+    { cod: 'RC-45-C28',  desc: 'Rufo RC 45',  cat: 'Chapa 28' },
+    { cod: 'RC-50-C28',  desc: 'Rufo RC 50',  cat: 'Chapa 28' },
+    { cod: 'RC-55-C28',  desc: 'Rufo RC 55',  cat: 'Chapa 28' },
+    { cod: 'RC-60-C28',  desc: 'Rufo RC 60',  cat: 'Chapa 28' },
+    { cod: 'RC-70-C28',  desc: 'Rufo RC 70',  cat: 'Chapa 28' },
+    { cod: 'RC-80-C28',  desc: 'Rufo RC 80',  cat: 'Chapa 28' },
+    { cod: 'RC-100-C28', desc: 'Rufo RC 100', cat: 'Chapa 28' },
+    { cod: 'RC-120-C28', desc: 'Rufo RC 120', cat: 'Chapa 28' },
   ],
-  telhado: [
-    {cod:'TELHA-GALV', nome:'Telha Galvanizada', cat:'Telha', unidade:'m²'},
-    {cod:'COND-25', nome:'Condutor 25mm', cat:'Condutor', unidade:'m'},
-    {cod:'COND-33', nome:'Condutor 33mm', cat:'Condutor', unidade:'m'},
-    {cod:'COND-40', nome:'Condutor 40mm', cat:'Condutor', unidade:'m'},
-    {cod:'COND-50', nome:'Condutor 50mm', cat:'Condutor', unidade:'m'},
-    {cod:'RC-30-C28', nome:'Rufo lateral', cat:'Rufo', unidade:'m'},
-    {cod:'RC-50-C28', nome:'Rufo superior', cat:'Rufo', unidade:'m'},
-    {cod:'CUMEEIRA', nome:'Cumeeira', cat:'Acabamento', unidade:'m'},
-    {cod:'BUCHA-8', nome:'Bucha 8', cat:'Fixação', unidade:'un'},
-    {cod:'PU-SELA', nome:'PU Sela Mais', cat:'Vedação', unidade:'un'},
-  ],
-  estrutura: [
-    {cod:'PERF-U-75', nome:'Perfil U 75x40x20', cat:'Perfil', unidade:'m'},
-    {cod:'VIGA-I300', nome:'Viga I 300x3mm', cat:'Viga', unidade:'m'},
-    {cod:'CHAPA-14', nome:'Chapa 14"', cat:'Chapa', unidade:'m²'},
-    {cod:'PARAF-13', nome:'Parafuso 13mm', cat:'Fixação', unidade:'un'},
-    {cod:'BROCANTINHO', nome:'Brocantinho', cat:'Fixação', unidade:'un'},
-    {cod:'BROCANTE-PAN', nome:'Brocante Panela', cat:'Fixação', unidade:'un'},
+  condutores: [
+    { cod: 'COND-25',  desc: 'Condutor 25mm',  cat: 'Condutor' },
+    { cod: 'COND-33',  desc: 'Condutor 33mm',  cat: 'Condutor' },
+    { cod: 'COND-40',  desc: 'Condutor 40mm',  cat: 'Condutor' },
+    { cod: 'COND-50',  desc: 'Condutor 50mm',  cat: 'Condutor' },
   ],
   outros: [
-    {cod:'RC-120-C24', nome:'RC 120 Chapa 24', cat:'Chapa 24', unidade:'m'},
-    {cod:'EST-SELA', nome:'Estanho Sela Mais', cat:'Estanho', unidade:'un'},
-    {cod:'EST-SUPER', nome:'Estanho Super Liga', cat:'Estanho', unidade:'un'},
-    {cod:'BUCHA-8', nome:'Bucha 8', cat:'Fixação', unidade:'un'},
-    {cod:'PU-SELA', nome:'PU Sela Mais', cat:'Vedação', unidade:'un'},
-    {cod:'BROCANTINHO', nome:'Brocantinho', cat:'Fixação', unidade:'un'},
-    {cod:'BROCANTE-PAN', nome:'Brocante Panela', cat:'Fixação', unidade:'un'},
+    { cod: 'RC-120-C24',   desc: 'RC 120 Chapa 24',   cat: 'Chapa 24' },
+    { cod: 'EST-SELA',     desc: 'Estanho Sela Mais',  cat: 'Estanho' },
+    { cod: 'EST-SUPER',    desc: 'Estanho Super Liga', cat: 'Estanho' },
+    { cod: 'BUCHA-8',      desc: 'Bucha 8',            cat: 'Fixação' },
+    { cod: 'PU-SELA',      desc: 'PU Sela Mais',       cat: 'Vedação' },
+    { cod: 'BROCANTINHO',  desc: 'Brocantinho',        cat: 'Fixação' },
+    { cod: 'BROCANTE-PAN', desc: 'Brocante Panela',    cat: 'Fixação' },
   ]
 };
 
-// Estado: itens adicionados { cod: {mat, qtd, categoria} }
-let itensSelecionados = {};
+const badgeCat = {
+  'Chapa 26': 'badge-azul',
+  'Chapa 28': 'badge-laranja',
+  'Chapa 24': 'badge-cinza',
+  'Condutor': 'badge-verde',
+  'Estanho':  'badge-cinza',
+  'Fixação':  'badge-cinza',
+  'Vedação':  'badge-cinza',
+};
 
 // ============================================================
-// CARREGAR PREÇOS DO LOCALSTORAGE (da Etapa 1)
+// CARREGAR PREÇOS SALVOS ou usar padrão (0,00)
 // ============================================================
 function getPrecos() {
-  try { return JSON.parse(localStorage.getItem('jf_precos') || '{}'); } catch(e) { return {}; }
+  try {
+    return JSON.parse(localStorage.getItem('jf_precos') || '{}');
+  } catch(e) { return {}; }
 }
-function getConfig() {
-  try { return JSON.parse(localStorage.getItem('jf_profissional') || '{}'); } catch(e) { return {}; }
-}
-function getPreco(cod) {
+
+function renderizarTabela(categoria) {
   const precos = getPrecos();
-  return parseFloat(precos[cod]) || 0;
-}
-function formatarReais(v) {
-  return 'R$ ' + parseFloat(v).toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-function dataFormatada(d) {
-  return d.toLocaleDateString('pt-BR');
-}
-
-// ============================================================
-// RENDERIZAR GRADES DE MATERIAIS
-// ============================================================
-function renderizarGrades() {
-  Object.keys(MATERIAIS).forEach(cat => {
-    const grade = document.getElementById('grade-' + cat);
-    if (!grade) return;
-    grade.innerHTML = '';
-    MATERIAIS[cat].forEach(mat => {
-      const preco = getPreco(mat.cod);
-      const selecionado = itensSelecionados[cat + '_' + mat.cod] ? 'selecionado' : '';
-      const precoTxt = preco > 0
-        ? formatarReais(preco) + '/' + mat.unidade
-        : 'Sem preço';
-      const precoClass = preco > 0 ? 'mat-preco' : 'mat-preco sem-preco';
-      grade.innerHTML += `
-        <button class="material-btn ${selecionado}" id="btn-${cat}-${mat.cod.replace(/[^a-zA-Z0-9]/g,'_')}"
-          onclick="toggleMaterial('${cat}','${mat.cod}')">
-          <span class="mat-cod">${mat.cod}</span>
-          <span class="mat-nome">${mat.nome}</span>
-          <span class="${precoClass}">${precoTxt}</span>
-          <span class="check">✓</span>
-        </button>`;
-    });
-  });
-}
-
-// ============================================================
-// TOGGLE MATERIAL — adicionar / remover
-// ============================================================
-function toggleMaterial(categoria, cod) {
-  const chave = categoria + '_' + cod;
-  if (itensSelecionados[chave]) {
-    delete itensSelecionados[chave];
-    mostrarToast('Item removido');
-  } else {
-    const mat = MATERIAIS[categoria].find(m => m.cod === cod);
-    if (!mat) return;
-    const preco = getPreco(cod);
-    itensSelecionados[chave] = { mat, qtd: 1, categoria, preco };
-    mostrarToast('✓ ' + mat.nome + ' adicionado');
-  }
-  renderizarGrades();
-  renderizarListasSelecionados();
-  atualizarBadges();
-  atualizarResumo();
-}
-
-// ============================================================
-// RENDERIZAR LISTAS DE SELECIONADOS
-// ============================================================
-function renderizarListasSelecionados() {
-  ['calhas','rufos','telhado','estrutura','outros'].forEach(cat => {
-    const lista = document.getElementById('lista-' + cat);
-    if (!lista) return;
-    const itens = Object.values(itensSelecionados).filter(i => i.categoria === cat);
-    if (itens.length === 0) {
-      lista.innerHTML = '<div class="vazio-msg">Nenhum item selecionado</div>';
-      return;
-    }
-    lista.innerHTML = itens.map(item => {
-      const sub = (item.qtd * item.preco).toFixed(2).replace('.',',');
-      return `
-        <div class="item-linha" id="linha-${cat}-${item.mat.cod.replace(/[^a-zA-Z0-9]/g,'_')}">
-          <span class="item-nome">${item.mat.nome}</span>
-          <div class="item-qtd-wrap">
-            <label>${item.mat.unidade}:</label>
-            <input class="item-qtd" type="number" min="0.1" step="0.1" value="${item.qtd}"
-              onchange="atualizarQtd('${cat}','${item.mat.cod}', this.value)">
+  const tbody = document.getElementById('tbody-' + categoria);
+  tbody.innerHTML = '';
+  materiais[categoria].forEach(mat => {
+    const preco = precos[mat.cod] || '';
+    const badgeClass = badgeCat[mat.cat] || 'badge-cinza';
+    tbody.innerHTML += `
+      <tr>
+        <td><code style="font-size:11px;background:#f0ede8;padding:2px 6px;border-radius:4px;color:#555">${mat.cod}</code></td>
+        <td style="font-weight:500">${mat.desc}</td>
+        <td><span class="badge-categoria ${badgeClass}">${mat.cat}</span></td>
+        <td>
+          <div class="campo-preco">
+            <span>R$</span>
+            <input type="number" step="0.01" min="0" placeholder="0,00"
+              data-cod="${mat.cod}"
+              value="${preco}"
+              onchange="salvarPrecoIndividual(this)"
+              onblur="salvarPrecoIndividual(this)">
           </div>
-          <span class="item-subtotal" id="sub-${cat}-${item.mat.cod.replace(/[^a-zA-Z0-9]/g,'_')}">
-            ${item.preco > 0 ? 'R$ ' + sub : '—'}
-          </span>
-          <button class="item-remover" onclick="toggleMaterial('${cat}','${item.mat.cod}')">✕</button>
-        </div>`;
-    }).join('');
+        </td>
+      </tr>`;
   });
 }
 
-// ============================================================
-// ATUALIZAR QUANTIDADE
-// ============================================================
-function atualizarQtd(categoria, cod, novaQtd) {
-  const chave = categoria + '_' + cod;
-  if (!itensSelecionados[chave]) return;
-  itensSelecionados[chave].qtd = parseFloat(novaQtd) || 1;
-  atualizarResumo();
-  // Atualizar subtotal da linha
-  const item = itensSelecionados[chave];
-  const sub = document.getElementById('sub-' + categoria + '-' + cod.replace(/[^a-zA-Z0-9]/g,'_'));
-  if (sub) sub.textContent = item.preco > 0 ? 'R$ ' + (item.qtd * item.preco).toFixed(2).replace('.',',') : '—';
+function renderizarTodas() {
+  ['calhas','rufos','condutores','outros'].forEach(renderizarTabela);
 }
 
 // ============================================================
-// BADGES DE CONTAGEM NAS ABAS
+// TROCAR ABAS
 // ============================================================
-function atualizarBadges() {
-  ['calhas','rufos','telhado','estrutura','outros'].forEach(cat => {
-    const count = Object.values(itensSelecionados).filter(i => i.categoria === cat).length;
-    const badge = document.getElementById('count-' + cat);
-    const aba = document.getElementById('aba-' + cat);
-    if (badge) badge.textContent = count;
-    if (aba) aba.classList.toggle('tem-itens', count > 0);
+function trocarAba(categoria) {
+  document.querySelectorAll('.aba').forEach((b,i) => {
+    const cats = ['calhas','rufos','condutores','outros'];
+    b.classList.toggle('ativa', cats[i] === categoria);
   });
+  document.querySelectorAll('.painel-aba').forEach(p => p.classList.remove('ativo'));
+  document.getElementById('painel-' + categoria).classList.add('ativo');
 }
 
 // ============================================================
-// TROCAR ABA DE SERVIÇO
+// SALVAR PREÇO INDIVIDUAL (auto-save ao sair do campo)
 // ============================================================
-function trocarServico(cat) {
-  document.querySelectorAll('.servico-aba').forEach(b => b.classList.remove('ativa'));
-  document.querySelectorAll('.painel-servico').forEach(p => p.classList.remove('ativo'));
-  document.getElementById('aba-' + cat).classList.add('ativa');
-  document.getElementById('painel-' + cat).classList.add('ativo');
+function salvarPrecoIndividual(input) {
+  const precos = getPrecos();
+  precos[input.dataset.cod] = parseFloat(input.value) || 0;
+  localStorage.setItem('jf_precos', JSON.stringify(precos));
 }
 
 // ============================================================
-// ATUALIZAR PAINEL DE RESUMO
+// SALVAR DADOS DO PROFISSIONAL
 // ============================================================
-function atualizarResumo() {
-  const nome = document.getElementById('cli_nome').value || '—';
-  const tipo = document.getElementById('cli_tipo_orc').value || '—';
-  const cidade = document.getElementById('cli_cidade').value || '—';
-  document.getElementById('res-nome').textContent = nome;
-  document.getElementById('res-tipo').textContent = tipo;
-  document.getElementById('res-cidade').textContent = cidade;
+function salvarDadosProfissional() {
+  const dados = {
+    nome_empresa: document.getElementById('nome_empresa').value,
+    cnpj: document.getElementById('cnpj').value,
+    responsavel: document.getElementById('responsavel').value,
+    telefone: document.getElementById('telefone').value,
+    endereco_empresa: document.getElementById('endereco_empresa').value,
+    email: document.getElementById('email').value,
+    cidade_empresa: document.getElementById('cidade_empresa').value,
+    validade_dias: document.getElementById('validade_dias').value,
+    garantia: document.getElementById('garantia').value,
+    texto_garantia: document.getElementById('texto_garantia').value,
+    pagamento: document.getElementById('pagamento').value,
+    obs_padrao: document.getElementById('obs_padrao').value,
+    mostrar_precos_unitarios: mostrarPrecosUnitarios,
+  };
+  localStorage.setItem('jf_profissional', JSON.stringify(dados));
+}
 
-  // Validade
-  const cfg = getConfig();
-  const dias = parseInt(cfg.validade_dias) || 7;
-  const validade = new Date();
-  validade.setDate(validade.getDate() + dias);
-  document.getElementById('res-validade').textContent = dataFormatada(validade);
+// ============================================================
+// PRIVACIDADE — toggle visibilidade de preços unitários
+// ============================================================
+let mostrarPrecosUnitarios = true;
 
-  // Observações padrão
-  const obs = cfg.obs_padrao || '';
-  const obsBox = document.getElementById('res-obs-box');
-  if (obs) {
-    obsBox.style.display = 'block';
-    document.getElementById('res-obs').textContent = obs;
+function togglePrivacidade() {
+  mostrarPrecosUnitarios = !mostrarPrecosUnitarios;
+  aplicarEstadoPrivacidade();
+  salvarDadosProfissional();
+  mostrarToast(mostrarPrecosUnitarios
+    ? 'Preços unitários visíveis no orçamento'
+    : 'Preços unitários ocultos — cliente verá só o total');
+}
+
+function aplicarEstadoPrivacidade() {
+  const btn = document.getElementById('btn-toggle-precos');
+  const label = document.getElementById('label-toggle');
+  const olhoAberto = document.getElementById('svg-olho-aberto');
+  const olhoFechado = document.getElementById('svg-olho-fechado');
+
+  // Elementos do preview
+  const els = ['td-preco-unit','td-preco-unit2','th-preco-unit'];
+
+  if (mostrarPrecosUnitarios) {
+    btn.style.background = 'white';
+    btn.style.color = 'var(--verde)';
+    btn.style.borderColor = 'var(--verde-borda)';
+    label.textContent = 'Visível';
+    olhoAberto.style.display = 'block';
+    olhoFechado.style.display = 'none';
+    els.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = '';
+    });
   } else {
-    obsBox.style.display = 'none';
+    btn.style.background = 'var(--laranja-claro)';
+    btn.style.color = 'var(--laranja)';
+    btn.style.borderColor = 'var(--laranja-borda)';
+    label.textContent = 'Oculto';
+    olhoAberto.style.display = 'none';
+    olhoFechado.style.display = 'block';
+    els.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
   }
+}
 
-  // Itens e total
-  const itens = Object.values(itensSelecionados);
-  const resLista = document.getElementById('res-itens-lista');
-  let total = 0;
-
-  if (itens.length === 0) {
-    resLista.innerHTML = '<div style="font-size:12px;color:#bbb;text-align:center;padding:8px 0">Nenhum item ainda</div>';
-  } else {
-    resLista.innerHTML = itens.map(item => {
-      const sub = item.qtd * item.preco;
-      total += sub;
-      return `<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:12px;border-bottom:1px solid #f0ede8">
-        <span style="color:#444">${item.mat.nome} <span style="color:#999">${item.qtd}${item.mat.unidade}</span></span>
-        <span style="font-weight:600;color:${item.preco > 0 ? '#2d7a4f' : '#bbb'}">${item.preco > 0 ? 'R$'+sub.toFixed(2).replace('.',',') : '—'}</span>
-      </div>`;
-    }).join('');
-  }
-
-  document.getElementById('res-total').textContent = formatarReais(total);
-
-  // Habilitar botão
-  const temCliente = document.getElementById('cli_nome').value.trim().length > 0;
-  document.getElementById('btn-gerar').disabled = !temCliente;
+function carregarPrivacidade() {
+  try {
+    const dados = JSON.parse(localStorage.getItem('jf_profissional') || '{}');
+    if (dados.mostrar_precos_unitarios === false) {
+      mostrarPrecosUnitarios = false;
+    } else {
+      mostrarPrecosUnitarios = true;
+    }
+    aplicarEstadoPrivacidade();
+  } catch(e) {}
 }
 
 // ============================================================
-// GERAR ORÇAMENTO (modal)
+// SALVAR TUDO E MOSTRAR TOAST
 // ============================================================
-function gerarOrcamento() {
-  const cfg = getConfig();
-  const dias = parseInt(cfg.validade_dias) || 7;
-  const validade = new Date();
-  validade.setDate(validade.getDate() + dias);
-  const hoje = new Date();
-
-  const itens = Object.values(itensSelecionados);
-  let total = 0;
-  const linhasTabela = itens.map(item => {
-    const sub = item.qtd * item.preco;
-    total += sub;
-    return `<tr>
-      <td>${item.mat.nome}</td>
-      <td style="text-align:center">${item.qtd} ${item.mat.unidade}</td>
-      <td style="text-align:right">${item.preco > 0 ? formatarReais(item.preco)+'/'+item.mat.unidade : '—'}</td>
-      <td style="text-align:right;font-weight:600">${item.preco > 0 ? formatarReais(sub) : '—'}</td>
-    </tr>`;
-  }).join('');
-
-  const descricao = document.getElementById('descricao_servico').value;
-  const obsAdic = document.getElementById('obs_adicionais').value;
-  const obsPadrao = cfg.obs_padrao || '';
-
-  document.getElementById('modal-conteudo').innerHTML = `
-    <div class="orc-header">
-      <div class="orc-logo-area">
-        <h1>🏠 ${cfg.nome_empresa || 'JF // CALHAS'}</h1>
-        <p>${cfg.responsavel || ''} — ${cfg.telefone || ''}</p>
-        <p>${cfg.endereco_empresa || ''}</p>
-        <p>${cfg.email || ''}</p>
-      </div>
-      <div class="orc-data">
-        <strong>DATA: ${dataFormatada(hoje)}</strong>
-      </div>
-    </div>
-
-    <div class="orc-info-grid">
-      <span class="rotulo">ORÇAMENTO:</span><span>${document.getElementById('cli_tipo_orc').value || '—'}</span>
-      <span class="rotulo">CLIENTE:</span><span>${document.getElementById('cli_nome').value}</span>
-      <span class="rotulo">ENDEREÇO:</span><span>${document.getElementById('cli_endereco').value || '—'}</span>
-      <span class="rotulo">CIDADE:</span><span>${document.getElementById('cli_cidade').value || '—'}</span>
-    </div>
-
-    ${descricao ? `
-    <div class="orc-secao">
-      <h4>Descrição do serviço</h4>
-      <div style="font-size:12px;line-height:1.7;color:#333">${descricao.replace(/\n/g,'<br>')}</div>
-    </div>` : ''}
-
-    <div class="orc-secao">
-      <h4>Materiais e serviços</h4>
-      <table class="orc-tabela">
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th style="text-align:center">Qtd</th>
-            <th style="text-align:right">Preço unit.</th>
-            <th style="text-align:right">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>${linhasTabela}</tbody>
-      </table>
-      <div class="orc-total-linha">
-        <div class="orc-total-box">
-          <div class="label">TOTAL</div>
-          <div class="valor">${formatarReais(total)}</div>
-        </div>
-      </div>
-    </div>
-
-    ${obsPadrao || obsAdic ? `
-    <div class="orc-secao">
-      <h4>Informações básicas</h4>
-      <div style="font-size:12px;line-height:1.7;color:#333">
-        ${obsPadrao ? obsPadrao + '<br>' : ''}
-        ${obsAdic || ''}
-      </div>
-    </div>` : ''}
-
-    <div class="orc-rodape">
-      <div>
-        <strong>Validade:</strong> ${dias} dias (até ${dataFormatada(validade)})
-      </div>
-      <div>
-        <strong>Garantia:</strong> ${cfg.garantia || '1 ano'}
-      </div>
-      <div style="grid-column:span 2;margin-top:4px;font-size:10px;color:#888">
-        ${cfg.texto_garantia || ''}
-      </div>
-      <div style="grid-column:span 2;margin-top:6px">
-        <strong>Pagamento:</strong> ${cfg.pagamento || 'PIX, Dinheiro ou cartão'}
-      </div>
-    </div>
-
-    <div class="orc-assinaturas">
-      <div class="orc-assinatura">
-        <div class="linha"></div>
-        <p>${cfg.nome_empresa || 'JF Serviços'}</p>
-      </div>
-      <div class="orc-assinatura">
-        <div class="linha"></div>
-        <p>Cliente</p>
-      </div>
-    </div>`;
-
-  document.getElementById('modal-overlay').classList.add('aberto');
-}
-
-function fecharModal() {
-  document.getElementById('modal-overlay').classList.remove('aberto');
-}
-
-// ============================================================
-// LIMPAR TUDO
-// ============================================================
-function limparTudo() {
-  if (!confirm('Limpar todos os itens e dados do orçamento atual?')) return;
-  itensSelecionados = {};
-  ['cli_nome','cli_tipo_orc','cli_endereco','cli_cidade','cli_telefone','descricao_servico','obs_adicionais'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
+function salvarTudo() {
+  salvarDadosProfissional();
+  // Salvar todos os preços da tabela atual visível
+  document.querySelectorAll('[data-cod]').forEach(input => {
+    salvarPrecoIndividual(input);
   });
-  renderizarGrades();
-  renderizarListasSelecionados();
-  atualizarBadges();
-  atualizarResumo();
-  mostrarToast('Orçamento limpo');
+  mostrarToast('Tudo salvo — configurações prontas para uso');
 }
 
-// ============================================================
-// TOAST
-// ============================================================
 function mostrarToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('visivel');
-  clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(() => t.classList.remove('visivel'), 2200);
+  setTimeout(() => t.classList.remove('visivel'), 3000);
 }
 
 // ============================================================
-// INIT
+// CARREGAR DADOS SALVOS nos campos
 // ============================================================
-renderizarGrades();
-renderizarListasSelecionados();
-atualizarBadges();
-atualizarResumo();
+function carregarDadosSalvos() {
+  try {
+    const dados = JSON.parse(localStorage.getItem('jf_profissional') || '{}');
+    Object.keys(dados).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = dados[id];
+    });
+  } catch(e) {}
+}
+
+// ============================================================
+// RESETAR PREÇOS
+// ============================================================
+function resetarPrecos() {
+  if (confirm('Restaurar todos os preços para R$ 0,00? Isso apaga os valores cadastrados.')) {
+    localStorage.removeItem('jf_precos');
+    renderizarTodas();
+    mostrarToast('Preços restaurados para zero.');
+  }
+}
+
+// ============================================================
+// INICIALIZAR
+// ============================================================
+carregarDadosSalvos();
+carregarPrivacidade();
+renderizarTodas();
 </script>
 </body>
 </html>
