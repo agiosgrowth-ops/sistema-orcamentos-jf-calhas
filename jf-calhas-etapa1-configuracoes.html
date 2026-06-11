@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JF // CALHAS — Configurações</title>
+<style>
+  :root {
+    --preto: #1a1a1a;
+    --cinza-escuro: #2d2d2d;
+    --cinza-medio: #4a4a4a;
+    --cinza-claro: #f5f5f3;
+    --borda: #e0ddd8;
+    --laranja: #d4571a;
+    --laranja-claro: #f5ede8;
+    --laranja-borda: #e8b49a;
+    --verde: #2d7a4f;
+    --verde-claro: #e8f4ee;
+    --azul: #1d5fa8;
+    --azul-claro: #e8f0fa;
+    --texto: #1a1a1a;
+    --texto-sec: #666660;
+    --branco: #ffffff;
+    --radius: 8px;
+    --sombra: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cinza-claro);
+    color: var(--texto);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Header */
+  .header {
+    background: var(--preto);
+    color: white;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+  .header-logo-icon {
+    width: 32px; height: 32px;
+    background: var(--laranja);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .header-nav {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+  .nav-btn.ativo { background: var(--laranja); color: white; }
+
+  /* Layout */
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  .page-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--preto);
+  }
+  .page-sub {
+    color: var(--texto-sec);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  /* Cards de seção */
+  .card {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--borda);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cinza-claro);
+  }
+  .card-header-icon {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .icon-laranja { background: var(--laranja-claro); color: var(--laranja); }
+  .icon-verde { background: var(--verde-claro); color: var(--verde); }
+  .icon-azul { background: var(--azul-claro); color: var(--azul); }
+
+  .card-header h2 { font-size: 14px; font-weight: 600; }
+  .card-header p { font-size: 12px; color: var(--texto-sec); }
+  .card-body { padding: 20px; }
+
+  /* Formulário */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .col-span-2 { grid-column: span 2; }
+
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .campo label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--texto-sec);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .campo input, .campo textarea, .campo select {
+    padding: 9px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--texto);
+    background: var(--branco);
+    transition: border 0.15s;
+    font-family: inherit;
+    width: 100%;
+  }
+  .campo input:focus, .campo textarea:focus, .campo select:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(212,87,26,0.1);
+  }
+  .campo textarea { resize: vertical; min-height: 70px; }
+
+  /* Tabela de materiais */
+  .tabela-materiais { width: 100%; border-collapse: collapse; }
+  .tabela-materiais th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--texto-sec);
+    border-bottom: 1px solid var(--borda);
+    background: var(--cinza-claro);
+  }
+  .tabela-materiais td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--borda);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .tabela-materiais tr:last-child td { border-bottom: none; }
+  .tabela-materiais tr:hover td { background: var(--cinza-claro); }
+
+  .campo-preco {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+    transition: border 0.15s;
+  }
+  .campo-preco:focus-within {
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(212,87,26,0.1);
+  }
+  .campo-preco span {
+    padding: 7px 10px;
+    background: var(--cinza-claro);
+    color: var(--texto-sec);
+    font-size: 12px;
+    font-weight: 500;
+    border-right: 1px solid var(--borda);
+    white-space: nowrap;
+  }
+  .campo-preco input {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 7px 10px;
+    width: 100px;
+    font-size: 13px;
+    background: transparent;
+  }
+  .campo-preco input:focus { outline: none; }
+
+  .badge-categoria {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badge-laranja { background: var(--laranja-claro); color: var(--laranja); }
+  .badge-verde { background: var(--verde-claro); color: var(--verde); }
+  .badge-azul { background: var(--azul-claro); color: var(--azul); }
+  .badge-cinza { background: #f0ede8; color: #666; }
+
+  /* Abas de categorias de materiais */
+  .abas {
+    display: flex;
+    border-bottom: 1px solid var(--borda);
+    margin-bottom: 0;
+    overflow-x: auto;
+    gap: 0;
+    background: var(--cinza-claro);
+  }
+  .aba {
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--texto-sec);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    border: none;
+    background: transparent;
+    transition: all 0.15s;
+    margin-bottom: -1px;
+  }
+  .aba:hover { color: var(--laranja); }
+  .aba.ativa { color: var(--laranja); border-bottom: 2px solid var(--laranja); font-weight: 600; }
+
+  .painel-aba { display: none; }
+  .painel-aba.ativo { display: block; }
+
+  /* Botões */
+  .btn-salvar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: var(--laranja);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-salvar:hover { background: #b84915; }
+  .btn-salvar:active { transform: scale(0.98); }
+
+  .btn-sec {
+    padding: 10px 18px;
+    background: var(--branco);
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-sec:hover { background: var(--cinza-claro); border-color: #ccc; }
+
+  .acoes-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid var(--borda);
+    background: var(--cinza-claro);
+  }
+
+  .toast {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--preto);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 999;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    gap: 8px;
+    align-items: center;
+  }
+  .toast.visivel { display: flex; }
+
+  .info-box {
+    background: var(--azul-claro);
+    border: 1px solid #b8d0f0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--azul);
+    margin-bottom: 16px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
+    .col-span-2 { grid-column: span 1; }
+    .header-nav { display: none; }
+    .tabela-materiais th:nth-child(3), .tabela-materiais td:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-logo">
+    <div class="header-logo-icon">🏠</div>
+    JF // CALHAS
+  </div>
+  <div class="header-nav">
+    <button class="nav-btn ativo">⚙️ Configurações</button>
+    <button class="nav-btn" onclick="alert('Disponível na Etapa 2!')">📋 Novo Orçamento</button>
+    <button class="nav-btn" onclick="alert('Disponível na Etapa 5!')">🔔 Alertas</button>
+  </div>
+</div>
+
+<!-- Conteúdo -->
+<div class="container">
+
+  <div class="page-title">Configurações do sistema</div>
+  <div class="page-sub">Preencha uma vez — seus dados aparecem em todos os orçamentos automaticamente</div>
+
+  <!-- SEÇÃO 1: Dados do profissional -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-laranja">👤</div>
+      <div>
+        <h2>Dados do profissional</h2>
+        <p>Aparece no cabeçalho de todos os orçamentos</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="campo">
+          <label>Nome / Empresa</label>
+          <input type="text" id="nome_empresa" placeholder="JF // CALHAS" value="JF // CALHAS">
+        </div>
+        <div class="campo">
+          <label>CNPJ</label>
+          <input type="text" id="cnpj" placeholder="00.000.000/0001-00" value="49.401.126/0001-67">
+        </div>
+        <div class="campo">
+          <label>Responsável</label>
+          <input type="text" id="responsavel" placeholder="Nome do técnico" value="Jefferson J Vargas">
+        </div>
+        <div class="campo">
+          <label>Telefone / WhatsApp</label>
+          <input type="text" id="telefone" placeholder="(16) 99999-9999" value="16.99346-2652">
+        </div>
+        <div class="campo col-span-2">
+          <label>Endereço completo</label>
+          <input type="text" id="endereco_empresa" placeholder="Rua, número, complemento" value="Rua Pascoal Santa Maria 574/A23">
+        </div>
+        <div class="campo">
+          <label>E-mail</label>
+          <input type="email" id="email" placeholder="contato@empresa.com" value="Jeferson_j2@hotmail.com">
+        </div>
+        <div class="campo">
+          <label>Cidade / Estado</label>
+          <input type="text" id="cidade_empresa" placeholder="Ribeirão Preto SP" value="Ribeirão Preto SP">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2: Condições padrão -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-azul">📄</div>
+      <div>
+        <h2>Condições padrão dos orçamentos</h2>
+        <p>Textos que aparecem no rodapé de todos os orçamentos</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="campo">
+          <label>Validade do orçamento (dias)</label>
+          <input type="number" id="validade_dias" value="7" min="1" max="30">
+        </div>
+        <div class="campo">
+          <label>Garantia do serviço</label>
+          <input type="text" id="garantia" value="1 ano — mão de obra e material">
+        </div>
+        <div class="campo col-span-2">
+          <label>Texto de garantia (detalhado)</label>
+          <textarea id="texto_garantia">Garantia referente a serviço realizado pelo técnico da empresa referente a mão de obra e material, desde que não haja violação por outro técnico dos serviços prestados.</textarea>
+        </div>
+        <div class="campo col-span-2">
+          <label>Formas de pagamento</label>
+          <input type="text" id="pagamento" value="PIX, Dinheiro ou cartão de crédito até 10x sem juros">
+        </div>
+        <div class="campo col-span-2">
+          <label>Observações padrão (aparece em todos os orçamentos)</label>
+          <textarea id="obs_padrao" placeholder="Ex: Serviço inclui mão de obra e material. Bucha parafuso n8. PU industrial.">Serviço inclui mão de obra e material. Bucha parafuso n8. PU industrial.</textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: Materiais -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-header-icon icon-verde">📦</div>
+      <div>
+        <h2>Materiais e preços</h2>
+        <p>Atualize os preços sempre que receber nova tabela do fornecedor</p>
+      </div>
+    </div>
+
+    <!-- Abas de categorias -->
+    <div class="abas">
+      <button class="aba ativa" onclick="trocarAba('calhas')">🔵 Calhas — Chapa 26</button>
+      <button class="aba" onclick="trocarAba('rufos')">🟠 Rufos — Chapa 28</button>
+      <button class="aba" onclick="trocarAba('condutores')">🟢 Condutores</button>
+      <button class="aba" onclick="trocarAba('outros')">⚪ Outros Materiais</button>
+    </div>
+
+    <!-- ABA CALHAS -->
+    <div id="painel-calhas" class="painel-aba ativo">
+      <div class="info-box">
+        ℹ️ Materiais para calhas em chapa 26. Preço por metro linear. Atualize sempre que receber nova tabela da <strong>Casa do Calheiro</strong>.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por metro (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-calhas">
+          <!-- gerado pelo JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ABA RUFOS -->
+    <div id="painel-rufos" class="painel-aba">
+      <div class="info-box">
+        ℹ️ Materiais para rufos em chapa 28. Preço por metro linear.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por metro (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-rufos">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ABA CONDUTORES -->
+    <div id="painel-condutores" class="painel-aba">
+      <div class="info-box">
+        ℹ️ Condutores para escoamento de água. Preço por metro linear.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por metro (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-condutores">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ABA OUTROS -->
+    <div id="painel-outros" class="painel-aba">
+      <div class="info-box">
+        ℹ️ Materiais auxiliares — bucha, PU, parafusos, estanho. Preço por unidade.
+      </div>
+      <table class="tabela-materiais">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Preço por unidade (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-outros">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="acoes-rodape">
+      <span style="font-size:12px; color:var(--texto-sec)">💾 Os preços são salvos no seu navegador — só você tem acesso</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-sec" onclick="resetarPrecos()">↺ Restaurar padrão</button>
+        <button class="btn-salvar" onclick="salvarTudo()">✅ Salvar todas as configurações</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- Toast de confirmação -->
+<div class="toast" id="toast">✅ Configurações salvas com sucesso!</div>
+
+<script>
+// ============================================================
+// DADOS DOS MATERIAIS
+// ============================================================
+const materiais = {
+  calhas: [
+    { cod: 'RC-40-C26',  desc: 'Calha RC 40',  cat: 'Chapa 26' },
+    { cod: 'RC-45-C26',  desc: 'Calha RC 45',  cat: 'Chapa 26' },
+    { cod: 'RC-50-C26',  desc: 'Calha RC 50',  cat: 'Chapa 26' },
+    { cod: 'RC-55-C26',  desc: 'Calha RC 55',  cat: 'Chapa 26' },
+    { cod: 'RC-60-C26',  desc: 'Calha RC 60',  cat: 'Chapa 26' },
+    { cod: 'RC-70-C26',  desc: 'Calha RC 70',  cat: 'Chapa 26' },
+    { cod: 'RC-80-C26',  desc: 'Calha RC 80',  cat: 'Chapa 26' },
+    { cod: 'RC-100-C26', desc: 'Calha RC 100', cat: 'Chapa 26' },
+    { cod: 'RC-120-C26', desc: 'Calha RC 120', cat: 'Chapa 26' },
+  ],
+  rufos: [
+    { cod: 'RC-10-C28',  desc: 'Rufo RC 10',  cat: 'Chapa 28' },
+    { cod: 'RC-15-C28',  desc: 'Rufo RC 15',  cat: 'Chapa 28' },
+    { cod: 'RC-20-C28',  desc: 'Rufo RC 20',  cat: 'Chapa 28' },
+    { cod: 'RC-25-C28',  desc: 'Rufo RC 25',  cat: 'Chapa 28' },
+    { cod: 'RC-28-C28',  desc: 'Rufo RC 28',  cat: 'Chapa 28' },
+    { cod: 'RC-30-C28',  desc: 'Rufo RC 30',  cat: 'Chapa 28' },
+    { cod: 'RC-33-C28',  desc: 'Rufo RC 33',  cat: 'Chapa 28' },
+    { cod: 'RC-35-C28',  desc: 'Rufo RC 35',  cat: 'Chapa 28' },
+    { cod: 'RC-40-C28',  desc: 'Rufo RC 40',  cat: 'Chapa 28' },
+    { cod: 'RC-45-C28',  desc: 'Rufo RC 45',  cat: 'Chapa 28' },
+    { cod: 'RC-50-C28',  desc: 'Rufo RC 50',  cat: 'Chapa 28' },
+    { cod: 'RC-55-C28',  desc: 'Rufo RC 55',  cat: 'Chapa 28' },
+    { cod: 'RC-60-C28',  desc: 'Rufo RC 60',  cat: 'Chapa 28' },
+    { cod: 'RC-70-C28',  desc: 'Rufo RC 70',  cat: 'Chapa 28' },
+    { cod: 'RC-80-C28',  desc: 'Rufo RC 80',  cat: 'Chapa 28' },
+    { cod: 'RC-100-C28', desc: 'Rufo RC 100', cat: 'Chapa 28' },
+    { cod: 'RC-120-C28', desc: 'Rufo RC 120', cat: 'Chapa 28' },
+  ],
+  condutores: [
+    { cod: 'COND-25',  desc: 'Condutor 25mm',  cat: 'Condutor' },
+    { cod: 'COND-33',  desc: 'Condutor 33mm',  cat: 'Condutor' },
+    { cod: 'COND-40',  desc: 'Condutor 40mm',  cat: 'Condutor' },
+    { cod: 'COND-50',  desc: 'Condutor 50mm',  cat: 'Condutor' },
+  ],
+  outros: [
+    { cod: 'RC-120-C24',   desc: 'RC 120 Chapa 24',   cat: 'Chapa 24' },
+    { cod: 'EST-SELA',     desc: 'Estanho Sela Mais',  cat: 'Estanho' },
+    { cod: 'EST-SUPER',    desc: 'Estanho Super Liga', cat: 'Estanho' },
+    { cod: 'BUCHA-8',      desc: 'Bucha 8',            cat: 'Fixação' },
+    { cod: 'PU-SELA',      desc: 'PU Sela Mais',       cat: 'Vedação' },
+    { cod: 'BROCANTINHO',  desc: 'Brocantinho',        cat: 'Fixação' },
+    { cod: 'BROCANTE-PAN', desc: 'Brocante Panela',    cat: 'Fixação' },
+  ]
+};
+
+const badgeCat = {
+  'Chapa 26': 'badge-azul',
+  'Chapa 28': 'badge-laranja',
+  'Chapa 24': 'badge-cinza',
+  'Condutor': 'badge-verde',
+  'Estanho':  'badge-cinza',
+  'Fixação':  'badge-cinza',
+  'Vedação':  'badge-cinza',
+};
+
+// ============================================================
+// CARREGAR PREÇOS SALVOS ou usar padrão (0,00)
+// ============================================================
+function getPrecos() {
+  try {
+    return JSON.parse(localStorage.getItem('jf_precos') || '{}');
+  } catch(e) { return {}; }
+}
+
+function renderizarTabela(categoria) {
+  const precos = getPrecos();
+  const tbody = document.getElementById('tbody-' + categoria);
+  tbody.innerHTML = '';
+  materiais[categoria].forEach(mat => {
+    const preco = precos[mat.cod] || '';
+    const badgeClass = badgeCat[mat.cat] || 'badge-cinza';
+    tbody.innerHTML += `
+      <tr>
+        <td><code style="font-size:11px;background:#f0ede8;padding:2px 6px;border-radius:4px;color:#555">${mat.cod}</code></td>
+        <td style="font-weight:500">${mat.desc}</td>
+        <td><span class="badge-categoria ${badgeClass}">${mat.cat}</span></td>
+        <td>
+          <div class="campo-preco">
+            <span>R$</span>
+            <input type="number" step="0.01" min="0" placeholder="0,00"
+              data-cod="${mat.cod}"
+              value="${preco}"
+              onchange="salvarPrecoIndividual(this)"
+              onblur="salvarPrecoIndividual(this)">
+          </div>
+        </td>
+      </tr>`;
+  });
+}
+
+function renderizarTodas() {
+  ['calhas','rufos','condutores','outros'].forEach(renderizarTabela);
+}
+
+// ============================================================
+// TROCAR ABAS
+// ============================================================
+function trocarAba(categoria) {
+  document.querySelectorAll('.aba').forEach((b,i) => {
+    const cats = ['calhas','rufos','condutores','outros'];
+    b.classList.toggle('ativa', cats[i] === categoria);
+  });
+  document.querySelectorAll('.painel-aba').forEach(p => p.classList.remove('ativo'));
+  document.getElementById('painel-' + categoria).classList.add('ativo');
+}
+
+// ============================================================
+// SALVAR PREÇO INDIVIDUAL (auto-save ao sair do campo)
+// ============================================================
+function salvarPrecoIndividual(input) {
+  const precos = getPrecos();
+  precos[input.dataset.cod] = parseFloat(input.value) || 0;
+  localStorage.setItem('jf_precos', JSON.stringify(precos));
+}
+
+// ============================================================
+// SALVAR DADOS DO PROFISSIONAL
+// ============================================================
+function salvarDadosProfissional() {
+  const dados = {
+    nome_empresa: document.getElementById('nome_empresa').value,
+    cnpj: document.getElementById('cnpj').value,
+    responsavel: document.getElementById('responsavel').value,
+    telefone: document.getElementById('telefone').value,
+    endereco_empresa: document.getElementById('endereco_empresa').value,
+    email: document.getElementById('email').value,
+    cidade_empresa: document.getElementById('cidade_empresa').value,
+    validade_dias: document.getElementById('validade_dias').value,
+    garantia: document.getElementById('garantia').value,
+    texto_garantia: document.getElementById('texto_garantia').value,
+    pagamento: document.getElementById('pagamento').value,
+    obs_padrao: document.getElementById('obs_padrao').value,
+  };
+  localStorage.setItem('jf_profissional', JSON.stringify(dados));
+}
+
+// ============================================================
+// SALVAR TUDO E MOSTRAR TOAST
+// ============================================================
+function salvarTudo() {
+  salvarDadosProfissional();
+  // Salvar todos os preços da tabela atual visível
+  document.querySelectorAll('[data-cod]').forEach(input => {
+    salvarPrecoIndividual(input);
+  });
+  mostrarToast('✅ Tudo salvo! Configurações prontas para uso.');
+}
+
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('visivel');
+  setTimeout(() => t.classList.remove('visivel'), 3000);
+}
+
+// ============================================================
+// CARREGAR DADOS SALVOS nos campos
+// ============================================================
+function carregarDadosSalvos() {
+  try {
+    const dados = JSON.parse(localStorage.getItem('jf_profissional') || '{}');
+    Object.keys(dados).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = dados[id];
+    });
+  } catch(e) {}
+}
+
+// ============================================================
+// RESETAR PREÇOS
+// ============================================================
+function resetarPrecos() {
+  if (confirm('Restaurar todos os preços para R$ 0,00? Isso apaga os valores cadastrados.')) {
+    localStorage.removeItem('jf_precos');
+    renderizarTodas();
+    mostrarToast('Preços restaurados para zero.');
+  }
+}
+
+// ============================================================
+// INICIALIZAR
+// ============================================================
+carregarDadosSalvos();
+renderizarTodas();
+</script>
+</body>
+</html>
