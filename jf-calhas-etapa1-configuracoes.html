@@ -338,6 +338,78 @@
     align-items: flex-start;
   }
 
+  /* Linha extra de material */
+  .linha-extra td { background: #fffdf9; }
+  .linha-extra:hover td { background: #fff8f0 !important; }
+  .input-extra {
+    padding: 6px 10px;
+    border: 1px solid var(--borda);
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: inherit;
+    color: var(--texto);
+    background: white;
+    width: 100%;
+    transition: border 0.15s;
+  }
+  .input-extra:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 2px rgba(212,87,26,0.1);
+  }
+  .btn-remover {
+    padding: 4px 10px;
+    background: white;
+    color: #a32d2d;
+    border: 1px solid #e8b4b4;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-remover:hover { background: #fff0f0; border-color: #a32d2d; }
+
+  .rodape-aba {
+    padding: 12px 16px;
+    border-top: 1px dashed var(--borda);
+    background: #fafaf8;
+  }
+  .btn-adicionar-material {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: white;
+    color: var(--laranja);
+    border: 1px solid var(--laranja-borda);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-adicionar-material:hover { background: var(--laranja-claro); }
+
+  /* Modal de confirmação */
+  .modal-confirmacao {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 9999;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .modal-confirmacao-box {
+    background: white; border-radius: 10px;
+    width: 100%; max-width: 380px; overflow: hidden;
+  }
+  .modal-confirmacao-header {
+    background: #1a1a1a; padding: 12px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .modal-confirmacao-body { padding: 18px 20px; }
+
   @media (max-width: 600px) {
     .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
     .col-span-2 { grid-column: span 1; }
@@ -606,12 +678,22 @@
             <th>Descrição</th>
             <th>Categoria</th>
             <th>Preço por metro (R$)</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tbody-calhas">
           <!-- gerado pelo JS -->
         </tbody>
       </table>
+      <div class="rodape-aba">
+        <button class="btn-adicionar-material" onclick="adicionarLinha('calhas')">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <line x1="6.5" y1="1" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="1" y1="6.5" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Adicionar material
+        </button>
+      </div>
     </div>
 
     <!-- ABA RUFOS -->
@@ -626,11 +708,21 @@
             <th>Descrição</th>
             <th>Categoria</th>
             <th>Preço por metro (R$)</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tbody-rufos">
         </tbody>
       </table>
+      <div class="rodape-aba">
+        <button class="btn-adicionar-material" onclick="adicionarLinha('rufos')">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <line x1="6.5" y1="1" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="1" y1="6.5" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Adicionar material
+        </button>
+      </div>
     </div>
 
     <!-- ABA CONDUTORES -->
@@ -645,11 +737,21 @@
             <th>Descrição</th>
             <th>Categoria</th>
             <th>Preço por metro (R$)</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tbody-condutores">
         </tbody>
       </table>
+      <div class="rodape-aba">
+        <button class="btn-adicionar-material" onclick="adicionarLinha('condutores')">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <line x1="6.5" y1="1" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="1" y1="6.5" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Adicionar material
+        </button>
+      </div>
     </div>
 
     <!-- ABA OUTROS -->
@@ -664,11 +766,21 @@
             <th>Descrição</th>
             <th>Categoria</th>
             <th>Preço por unidade (R$)</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tbody-outros">
         </tbody>
       </table>
+      <div class="rodape-aba">
+        <button class="btn-adicionar-material" onclick="adicionarLinha('outros')">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <line x1="6.5" y1="1" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="1" y1="6.5" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Adicionar material
+        </button>
+      </div>
     </div>
 
     <div class="acoes-rodape">
@@ -933,11 +1045,91 @@ function resetarPrecos() {
 }
 
 // ============================================================
+// MATERIAIS EXTRAS — adicionar / remover / salvar
+// ============================================================
+function getExtras() {
+  try { return JSON.parse(localStorage.getItem('jf_extras') || '{}'); } catch(e) { return {}; }
+}
+function salvarExtras() {
+  const extras = { calhas: [], rufos: [], condutores: [], outros: [] };
+  ['calhas','rufos','condutores','outros'].forEach(cat => {
+    document.querySelectorAll('#tbody-' + cat + ' tr.linha-extra').forEach(tr => {
+      const inputs = tr.querySelectorAll('input');
+      extras[cat].push({
+        cod:   inputs[0].value.trim(),
+        desc:  inputs[1].value.trim(),
+        cat:   inputs[2].value.trim(),
+        preco: parseFloat(inputs[3].value) || 0
+      });
+    });
+  });
+  localStorage.setItem('jf_extras', JSON.stringify(extras));
+}
+
+function adicionarLinha(categoria, dados) {
+  const tbody = document.getElementById('tbody-' + categoria);
+  const tr = document.createElement('tr');
+  tr.classList.add('linha-extra');
+  tr.innerHTML =
+    '<td><input class="input-extra" type="text" placeholder="EX-001" value="' + (dados&&dados.cod||'') + '" onblur="salvarExtras()"></td>' +
+    '<td><input class="input-extra" type="text" placeholder="Descrição do material" value="' + (dados&&dados.desc||'') + '" onblur="salvarExtras()"></td>' +
+    '<td><input class="input-extra" type="text" placeholder="Categoria" value="' + (dados&&dados.cat||'') + '" onblur="salvarExtras()"></td>' +
+    '<td><div class="campo-preco"><span>R$</span><input type="number" step="0.01" min="0" placeholder="0,00" value="' + (dados&&dados.preco||'') + '" onblur="salvarExtras()"></div></td>' +
+    '<td><button class="btn-remover" onclick="confirmarRemocao(this)">Remover</button></td>';
+  tbody.appendChild(tr);
+  tr.querySelector('input').focus();
+}
+
+function confirmarRemocao(btn) {
+  const tr = btn.closest('tr');
+  const inputs = tr.querySelectorAll('input');
+  const desc = inputs[1] ? inputs[1].value : '';
+
+  const modal = document.createElement('div');
+  modal.className = 'modal-confirmacao';
+  modal.innerHTML =
+    '<div class="modal-confirmacao-box">' +
+      '<div class="modal-confirmacao-header">' +
+        '<div style="display:flex;align-items:center;gap:8px;">' +
+          '<div style="background:#a32d2d;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;color:white;">REMOVER</div>' +
+          '<span style="color:white;font-size:13px;font-weight:600;">Confirmar exclusão</span>' +
+        '</div>' +
+        '<button onclick="this.closest(\'.modal-confirmacao\').remove()" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:18px;line-height:1;">\u2715</button>' +
+      '</div>' +
+      '<div class="modal-confirmacao-body">' +
+        '<p style="font-size:13px;color:#444;line-height:1.7;margin-bottom:18px;">Tem certeza que deseja remover <strong>' + (desc||'este material') + '</strong>?<br><span style="font-size:12px;color:#888;">Esta ação não pode ser desfeita.</span></p>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button onclick="this.closest(\'.modal-confirmacao\').remove()" style="flex:1;padding:9px;background:white;color:#666;border:1px solid #e0ddd8;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;">Cancelar</button>' +
+          '<button id="btn-conf-rem" style="flex:1;padding:9px;background:#a32d2d;color:white;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Sim, remover</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  document.body.appendChild(modal);
+
+  modal.querySelector('#btn-conf-rem').addEventListener('click', function() {
+    tr.remove();
+    salvarExtras();
+    modal.remove();
+    mostrarToast('Material removido.');
+  });
+  modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
+}
+
+function carregarExtras() {
+  const extras = getExtras();
+  ['calhas','rufos','condutores','outros'].forEach(function(cat) {
+    (extras[cat] || []).forEach(function(item) { adicionarLinha(cat, item); });
+  });
+}
+
+// ============================================================
 // INICIALIZAR
 // ============================================================
 carregarDadosSalvos();
 carregarPrivacidade();
 renderizarTodas();
+carregarExtras();
 </script>
 </body>
 </html>
